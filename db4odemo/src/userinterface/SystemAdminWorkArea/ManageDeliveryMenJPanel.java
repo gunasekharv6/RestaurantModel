@@ -5,6 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Organization;
 import Business.UserAccount.UserAccount;
@@ -26,24 +27,23 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    Organization deliverManOrg;
-    public ManageDeliveryMenJPanel(JPanel userProcessContainer,EcoSystem ecosystem,Organization deliverManOrg) {
+    
+    public ManageDeliveryMenJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
-        this.deliverManOrg=deliverManOrg;
-        populateTable1();
+        populateTableDeliveryManList();
         
     }
-public void populateTable1(){
-        DefaultTableModel dtm = (DefaultTableModel) tblDeliveryMenList.getModel();
+    public void populateTableDeliveryManList(){
+        DefaultTableModel dtm = (DefaultTableModel) tblDeliveryManList.getModel();
         dtm.setRowCount(0);
       
-        for(UserAccount ua:ecosystem.getUserAccountDirectory().getUserAccountList()) {
+        for(DeliveryMan deliveryman:ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
             Object row[] = new Object[3];
-            row[0] = ua.getEmployee().getName();
-            row[1] = ua;
-            row[2] = ua.getPassword();
+            row[0] = deliveryman.getDeliveryManName();
+            row[1] = deliveryman.getUseraccount().getUsername();
+            row[2] = deliveryman.getUseraccount().getPassword();
             //row[4] = airliner.getFlightDir().getFlightList().size();
             dtm.addRow(row);
         
@@ -60,7 +60,7 @@ public void populateTable1(){
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDeliveryMenList = new javax.swing.JTable();
+        tblDeliveryManList = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnCreate = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public void populateTable1(){
         btnDelete = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        tblDeliveryMenList.setModel(new javax.swing.table.DefaultTableModel(
+        tblDeliveryManList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,7 +84,7 @@ public void populateTable1(){
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblDeliveryMenList);
+        jScrollPane1.setViewportView(tblDeliveryManList);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -173,7 +173,7 @@ public void populateTable1(){
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-          CreateNewDeliveryManJPanel panel = new CreateNewDeliveryManJPanel(userProcessContainer,ecosystem,deliverManOrg);
+        CreateNewDeliveryManJPanel panel = new CreateNewDeliveryManJPanel(userProcessContainer,ecosystem);
         userProcessContainer.add("CreateNewDeliveryManJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -182,14 +182,14 @@ public void populateTable1(){
 
     private void btnUpdateDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDeliveryManActionPerformed
         // TODO add your handling code here:
-   int selectedRow = tblDeliveryMenList.getSelectedRow();
+        int selectedRow = tblDeliveryManList.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
             return;
         }
         else{
-            UserAccount ua = (UserAccount)tblDeliveryMenList.getValueAt(selectedRow, 1);
-            UpdateUserJPanel panel = new UpdateUserJPanel(userProcessContainer,ua,"DeliveryMan");
+            DeliveryMan dm = (DeliveryMan)tblDeliveryManList.getValueAt(selectedRow, 1);
+            UpdateDeliveryManJPanel panel = new UpdateDeliveryManJPanel(userProcessContainer,dm.getUseraccount());
             userProcessContainer.add("UpdateUserJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -198,17 +198,16 @@ public void populateTable1(){
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblDeliveryMenList.getSelectedRow();
+        int selectedRow = tblDeliveryManList.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
             return;
         }
         else{
-            UserAccount ua = (UserAccount)tblDeliveryMenList.getValueAt(selectedRow, 1);
-            deliverManOrg.getUserAccountDirectory().deleteUserAccount(ua);
-            deliverManOrg.getEmployeeDirectory().deleteEmployee(ua.getEmployee());
-        JOptionPane.showMessageDialog(null, "User Account deleted successfully");
-    } 
+            DeliveryMan dm = (DeliveryMan)tblDeliveryManList.getValueAt(selectedRow, 1);
+            ecosystem.getDeliveryManDirectory().deleteDeliveryMan(dm);
+            JOptionPane.showMessageDialog(this, "DeliveryMan Account deleted successfully");
+        } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -236,6 +235,6 @@ public void populateTable1(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblDeliveryMenList;
+    private javax.swing.JTable tblDeliveryManList;
     // End of variables declaration//GEN-END:variables
 }

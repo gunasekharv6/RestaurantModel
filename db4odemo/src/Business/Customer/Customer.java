@@ -14,18 +14,20 @@ import Business.UserAccount.UserAccount;
  *
  * @author harold
  */
-public class Customer extends UserAccount{
+public class Customer{ //extends UserAccount{
     private String customerName;
     private String phoneNumber;
 //    private String Address;
     private Restaurant restaurant;
+    private UserAccount useraccount;
 
     public Customer(String customerName, String phoneNumber, Restaurant restaurant, String username, String password) {
-        super(username, password, new CustomerRole());
+        
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
 //        this.Address = Address;
         this.restaurant = restaurant;
+        useraccount = new UserAccount(username, password, new CustomerRole());
     }
 
     public String getCustomerName() {
@@ -44,20 +46,22 @@ public class Customer extends UserAccount{
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
+
     public Role getRole() {
-        return super.getRole(); //To change body of generated methods, choose Tools | Templates.
+        return useraccount.getRole(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String getPassword() {
-        return super.getPassword(); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public String getUsername() {
-        return super.getUsername(); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public String getPassword() {
+//        return useraccount.getPassword(); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//
+//    public String getUsername() {
+//        return useraccount.getUsername(); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    
+    
     
     public Restaurant getRestaurant() {
         return restaurant;
@@ -66,20 +70,17 @@ public class Customer extends UserAccount{
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     } 
+
+    public UserAccount getUseraccount() {
+        return useraccount;
+    }
+
+    public void setUseraccount(UserAccount useraccount) {
+        this.useraccount = useraccount;
+    }
     
     
     
-    
-    
-    
-    
-//    public String getAddress() {
-//        return Address;
-//    }
-//
-//    public void setAddress(String Address) {
-//        this.Address = Address;
-//    }
 
     @Override
     public String toString() {

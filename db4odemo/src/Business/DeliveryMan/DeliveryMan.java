@@ -6,32 +6,35 @@
 package Business.DeliveryMan;
 
 import Business.Restaurant.Restaurant;
+import Business.Role.DeliverManRole;
+import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 
 /**
  *
  * @author harold
  */
-public class DeliveryMan extends UserAccount{
+public class DeliveryMan {
     private String deliveryManName;
     private String phoneNumber;
 //    private String Address;
     private Restaurant restaurant;
+    private UserAccount useraccount;
 
-    public Customer(String customerName, String phoneNumber, Restaurant restaurant, String username, String password) {
-        super(username, password, new CustomerRole());
-        this.customerName = customerName;
-        this.phoneNumber = phoneNumber;
+    public DeliveryMan(String name, String username, String password) {
+        this.deliveryManName = name;
+//        this.phoneNumber = phoneNumber;
 //        this.Address = Address;
-        this.restaurant = restaurant;
+//        this.restaurant = restaurant;
+        useraccount = new UserAccount(username, password, new DeliverManRole());
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getDeliveryManName() {
+        return this.deliveryManName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setDeliveryManName(String deliveryManName) {
+        this.deliveryManName = deliveryManName;
     }
 
     public String getPhoneNumber() {
@@ -42,20 +45,19 @@ public class DeliveryMan extends UserAccount{
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public Role getRole() {
-        return super.getRole(); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public String getPassword() {
-        return super.getPassword(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getUsername() {
-        return super.getUsername(); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Role getRole() {
+//        return useraccount.getRole(); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public String getPassword() {
+//        return useraccount.getPassword(); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//
+//    public String getUsername() {
+//        return useraccount.getUsername(); //To change body of generated methods, choose Tools | Templates.
+//    }
     
     public Restaurant getRestaurant() {
         return restaurant;
@@ -64,4 +66,14 @@ public class DeliveryMan extends UserAccount{
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
+
+    public UserAccount getUseraccount() {
+        return useraccount;
+    }
+
+    public void setUseraccount(UserAccount useraccount) {
+        this.useraccount = useraccount;
+    }
+    
+    
 }

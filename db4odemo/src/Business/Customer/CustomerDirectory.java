@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author harold
  */
-public class CustomerDirectory extends UserAccountDirectory{
+public class CustomerDirectory {//extends UserAccountDirectory{
     private List<Customer> customerlist;
 
     public CustomerDirectory() {
@@ -24,7 +24,7 @@ public class CustomerDirectory extends UserAccountDirectory{
     public boolean addCustomer(Customer customer){
         if(checkIfcustomernameExists(customer.getCustomerName()) == -1){
             customerlist.add(customer);
-            super.createUserAccount(customer.getUsername(), customer.getPassword(), customer.getRole());
+            //super.createUserAccount(customer.getUsername(), customer.getPassword(), customer.getRole());
             JOptionPane.showMessageDialog(null, "Customer is added successfully");
             return true;
         }else{
@@ -40,7 +40,7 @@ public class CustomerDirectory extends UserAccountDirectory{
             return false;
         }else{
             customerlist.remove(index);
-            super.deleteUserAccount(customer.getUsername());
+            //super.deleteUserAccount(customer.getUsername());
             JOptionPane.showMessageDialog(null, "Error!\nCustomer deleted successfully");
             return true;
         } 
