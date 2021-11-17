@@ -4,12 +4,17 @@
  */
 package Business;
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.MasterUserAccountDirectory;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -20,6 +25,8 @@ public abstract class Organization {
     private String name;
     private WorkQueue workQueue;
     private EmployeeDirectory employeeDirectory;
+    private CustomerDirectory custDirectory;
+    private DeliveryManDirectory deliveryManDirectory;
     private UserAccountDirectory userAccountDirectory;
     
     private int organizationID;
@@ -44,19 +51,56 @@ public abstract class Organization {
         this.name = name;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
+        custDirectory = new CustomerDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();
+//        userAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
     }
     public Organization(){
         
     }
-    public abstract ArrayList<Role> getSupportedRole();
     
-    public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+    public static List<String> getRolesList(){
+        List<String> availableRoles = new ArrayList<String>();
+        for(Type type : Type.values()){
+            availableRoles.add(type.getValue());
+        }return availableRoles;
+//        return Stream.of(Type.values()).map(Type::name).collect(Collectors.toList());
+    }
+//    public abstract ArrayList<Role> getSupportedRole();
+//    
+////    public UserAccountDirectory getUserAccountDirectory() {
+////        return userAccountDirectory;
+////    }
+
+    public CustomerDirectory getCustDirectory() {
+        return custDirectory;
     }
 
+    public void setCustDirectory(CustomerDirectory custDirectory) {
+        this.custDirectory = custDirectory;
+    }
+
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
+    }
+
+    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
+        this.deliveryManDirectory = deliveryManDirectory;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        Organization.counter = counter;
+    }
+
+    
+    
+    
     public int getOrganizationID() {
         return organizationID;
     }
@@ -84,6 +128,14 @@ public abstract class Organization {
     @Override
     public String toString() {
         return name;
+    }
+
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccountDirectory;
+    }
+
+    public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
+        this.userAccountDirectory = userAccountDirectory;
     }
     
     

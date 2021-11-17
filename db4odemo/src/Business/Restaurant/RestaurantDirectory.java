@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
  * @author harold
  */
 public class RestaurantDirectory {
-    private static List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+    private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 
-    public static boolean addRestaurant(Restaurant restaurant){
+    public boolean addRestaurant(Restaurant restaurant){
         if(checkIfRestaurantnameIsUnique(restaurant.getRestaurantName())){
             restaurantList.add(restaurant);
             JOptionPane.showMessageDialog(null, "Restaurant is added successfully");
@@ -29,15 +29,15 @@ public class RestaurantDirectory {
     }
     
     
-    public static List<Restaurant> getRestaurantList() {
+    public List<Restaurant> getRestaurantList() {
         return restaurantList;
     }
 
-    public static void setRestaurantList(List<Restaurant> restaurantList) {
-        RestaurantDirectory.restaurantList = restaurantList;
+    public void setRestaurantList(List<Restaurant> restaurantList) {
+        this.restaurantList = restaurantList;
     }
     
-    public static boolean checkIfRestaurantnameIsUnique(String restaurantname){
+    public boolean checkIfRestaurantnameIsUnique(String restaurantname){
         for (Restaurant ra : restaurantList){
             if (ra.getRestaurantName().equals(restaurantname))
                 return false;

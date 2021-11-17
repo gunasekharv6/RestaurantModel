@@ -198,40 +198,40 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
   private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
     // TODO add your handling code here:
 
-    for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
-      if (ua.getUsername().equals(txtUserName.getText())) {
-        JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
-        return;
-      }
-    }
-    if (usernamePatternCorrect() == false) {
-      UsrNameLabel.setForeground(Color.red);
-      txtUserName.setBorder(BorderFactory.createLineBorder(Color.RED));
-      JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
-      return;
-    } else {
-      UsrNameLabel.setForeground(Color.BLACK);
-      txtUserName.setBorder(BorderFactory.createLineBorder(Color.black));
-    }
-    if (passwordPatternCorrect() == false) {
-      passwordLabel.setForeground(Color.red);
-      txtPassword.setBorder(BorderFactory.createLineBorder(Color.RED));
-      JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
-      return;
-    } else {
-      passwordLabel.setForeground(Color.BLACK);
-      txtPassword.setBorder(BorderFactory.createLineBorder(Color.black));
-    }
-    String employeeName = txtEmployeeName.getText();
-    String userName = txtUserName.getText();
-    String password = txtPassword.getText();
-
-    Employee employee = organization.getEmployeeDirectory().createEmployee(employeeName);
-//    organization.getUserAccountDirectory().createUserAccount(userName, password, employee, new CustomerRole());
-    JOptionPane.showMessageDialog(null, "Customer added successfully");
-    txtUserName.setText("");
-    txtEmployeeName.setText("");
-    txtPassword.setText("");
+//    for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+//      if (ua.getUsername().equals(txtUserName.getText())) {
+//        JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
+//        return;
+//      }
+//    }
+//    if (usernamePatternCorrect() == false) {
+//      UsrNameLabel.setForeground(Color.red);
+//      txtUserName.setBorder(BorderFactory.createLineBorder(Color.RED));
+//      JOptionPane.showMessageDialog(null, "Username should be in the format of xx_xx@xx.xx");
+//      return;
+//    } else {
+//      UsrNameLabel.setForeground(Color.BLACK);
+//      txtUserName.setBorder(BorderFactory.createLineBorder(Color.black));
+//    }
+//    if (passwordPatternCorrect() == false) {
+//      passwordLabel.setForeground(Color.red);
+//      txtPassword.setBorder(BorderFactory.createLineBorder(Color.RED));
+//      JOptionPane.showMessageDialog(null, "Password should be at least 6 digits and contain at least one upper case letter, one lower case letter, one digit and one special character $, *, # or &.");
+//      return;
+//    } else {
+//      passwordLabel.setForeground(Color.BLACK);
+//      txtPassword.setBorder(BorderFactory.createLineBorder(Color.black));
+//    }
+//    String employeeName = txtEmployeeName.getText();
+//    String userName = txtUserName.getText();
+//    String password = txtPassword.getText();
+//
+//    Employee employee = organization.getEmployeeDirectory().createEmployee(employeeName);
+////    organization.getUserAccountDirectory().createUserAccount(userName, password, employee, new CustomerRole());
+//    JOptionPane.showMessageDialog(null, "Customer added successfully");
+//    txtUserName.setText("");
+//    txtEmployeeName.setText("");
+//    txtPassword.setText("");
   }//GEN-LAST:event_btnCreateActionPerformed
 
   private boolean usernamePatternCorrect() {

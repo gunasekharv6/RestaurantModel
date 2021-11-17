@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
 
 import Business.Organization;
+import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.MasterUserAccountDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -34,6 +35,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(1680, 1050);
         system.setMasterUserAccountDirectory(new MasterUserAccountDirectory());
         system.setCustomerDirectory(new CustomerDirectory());
+        system.setRestaurantDirectory(new RestaurantDirectory());
     }
 
     /**

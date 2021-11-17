@@ -5,10 +5,63 @@
  */
 package Business.DeliveryMan;
 
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author harold
  */
-public class DeliveryMan {
+public class DeliveryMan extends UserAccount{
+    private String deliveryManName;
+    private String phoneNumber;
+//    private String Address;
+    private Restaurant restaurant;
+
+    public Customer(String customerName, String phoneNumber, Restaurant restaurant, String username, String password) {
+        super(username, password, new CustomerRole());
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+//        this.Address = Address;
+        this.restaurant = restaurant;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public Role getRole() {
+        return super.getRole(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPassword() {
+        return super.getPassword(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getUsername() {
+        return super.getUsername(); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }
