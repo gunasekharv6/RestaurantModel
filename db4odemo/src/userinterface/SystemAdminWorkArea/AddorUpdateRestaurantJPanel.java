@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  *
  * @author braya
  */
-public class UpdateRestaurantJPanel extends javax.swing.JPanel {
+public class AddorUpdateRestaurantJPanel extends javax.swing.JPanel {
 
     JPanel cardSequenceJPanel;
     Restaurant restaurant;
@@ -32,14 +32,17 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
     EcoSystem system;
     
 
-    UpdateRestaurantJPanel(JPanel cardSequenceJPanel, EcoSystem system) {
+    AddorUpdateRestaurantJPanel(JPanel cardSequenceJPanel, EcoSystem system) {
         initComponents();
         this.cardSequenceJPanel = cardSequenceJPanel;
         this.system=system;
+        this.restaurant = new Restaurant("");
+        //system.getRestaurantDirectory().addRestaurant(rt);
+        //this.userAccount = restaurant.getManager().getUseraccount();
         
     }
     
-    UpdateRestaurantJPanel(JPanel cardSequenceJPanel, Restaurant restaurant, UserAccount userAccount, EcoSystem system) {
+    AddorUpdateRestaurantJPanel(JPanel cardSequenceJPanel, Restaurant restaurant, UserAccount userAccount, EcoSystem system) {
         initComponents();
         this.cardSequenceJPanel = cardSequenceJPanel;
         txtusername.setText(userAccount.getUsername());
@@ -54,7 +57,7 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
         this.restaurant = restaurant;        
     }
     
-        UpdateRestaurantJPanel(JPanel cardSequenceJPanel, Restaurant restaurant, EcoSystem system) {
+        AddorUpdateRestaurantJPanel(JPanel cardSequenceJPanel, Restaurant restaurant, EcoSystem system) {
         initComponents();
         this.cardSequenceJPanel = cardSequenceJPanel;
         Employee manager = restaurant.getManager();
@@ -273,7 +276,25 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
         txtPassword.setBorder(BorderFactory.createLineBorder(Color.black));
         }
         
-        restaurant.setCuisineType(txtcuisinetype.getText());
+        Restaurant rt;
+        if (system.getRestaurantDirectory().checkIfRestaurantnameIsUnique(txtrestaurantname.getText())){
+            if (!system.getRestaurantDirectory().checkIfRestaurantnameIsUnique(this.restaurant.getName())){
+                system.getRestaurantDirectory().deleteRestaurant(this.restaurant);
+            }
+            rt = new Restaurant(txtrestaurantname.getText());
+            this.restaurant = rt;
+            system.getRestaurantDirectory().addRestaurant(rt);
+            this.userAccount = this.restaurant.getManager().getUseraccount();
+
+        }else{
+            int index = system.getRestaurantDirectory().checkIfRestaurantExists(txtrestaurantname.getText());
+            rt = system.getRestaurantDirectory().getRestaurantList().get(index);
+            this.restaurant = rt;
+            this.userAccount = this.restaurant.getManager().getUseraccount();
+        }
+        
+        
+        this.restaurant.setCuisineType(txtcuisinetype.getText());
         userAccount.setPassword(txtPassword.getText());
         userAccount.setUsername(txtusername.getText());
         
@@ -281,22 +302,15 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
             userAccount.getEmployee().setName(txtmanagername.getText());
         }
 
-        Restaurant restaurant;
-        if (system.getRestaurantDirectory().checkIfRestaurantnameIsUnique(txtrestaurantname.getText())){
-          restaurant = new Restaurant(txtrestaurantname.getText());
-          system.getRestaurantDirectory().addRestaurant(restaurant);
 
-        }else{
-          int index = system.getRestaurantDirectory().checkIfRestaurantExists(txtrestaurantname.getText());
-          restaurant = system.getRestaurantDirectory().getRestaurantList().get(index);
-        }
-        userAccount.getEmployee().setRestaurant(restaurant);
-        restaurant.setAddress(txtRestaurantAddress.getText().isEmpty()?"":txtRestaurantAddress.getText());
+        userAccount.getEmployee().setRestaurant(this.restaurant);
+        this.restaurant.setAddress(txtRestaurantAddress.getText().isEmpty()?"":txtRestaurantAddress.getText());
 
         JOptionPane.showMessageDialog(this, "Updated Successfully");
         
         String name=txtrestaurantname.getText();
         String address=txtRestaurantAddress.getText();
+        
         if (name.equals("") ){
             JOptionPane.showMessageDialog(null,"Name field cannot be empty");
             return;            

@@ -26,27 +26,27 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
      */
     
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
+    EcoSystem system;
     
     public ManageDeliveryMenJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
+        this.system=ecosystem;
         populateTableDeliveryManList();
         
     }
     public void populateTableDeliveryManList(){
         DefaultTableModel dtm = (DefaultTableModel) tblDeliveryManList.getModel();
         dtm.setRowCount(0);
-      
-        for(DeliveryMan deliveryman:ecosystem.getDeliveryManDirectory().getDeliveryManList()) {
-            Object row[] = new Object[3];
-            row[0] = deliveryman.getDeliveryManName();
-            row[1] = deliveryman.getUseraccount().getUsername();
-            row[2] = deliveryman.getUseraccount().getPassword();
-            //row[4] = airliner.getFlightDir().getFlightList().size();
-            dtm.addRow(row);
-        
+        if (!system.getDeliveryManDirectory().getDeliveryManList().isEmpty()){
+            for(DeliveryMan deliveryman:system.getDeliveryManDirectory().getDeliveryManList()) {
+                Object row[] = new Object[3];
+                row[0] = deliveryman.getDeliveryManName();
+                row[1] = deliveryman.getUseraccount().getUsername();
+                row[2] = deliveryman.getUseraccount().getPassword();
+                //row[4] = airliner.getFlightDir().getFlightList().size();
+                dtm.addRow(row);
+            }        
         }
     }
     
@@ -173,7 +173,7 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CreateNewDeliveryManJPanel panel = new CreateNewDeliveryManJPanel(userProcessContainer,ecosystem);
+        CreateNewDeliveryManJPanel panel = new CreateNewDeliveryManJPanel(userProcessContainer,system);
         userProcessContainer.add("CreateNewDeliveryManJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -189,7 +189,7 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
         }
         else{
             DeliveryMan dm = (DeliveryMan)tblDeliveryManList.getValueAt(selectedRow, 1);
-            UpdateDeliveryManJPanel panel = new UpdateDeliveryManJPanel(userProcessContainer,dm.getUseraccount(), ecosystem);
+            UpdateDeliveryManJPanel panel = new UpdateDeliveryManJPanel(userProcessContainer,dm.getUseraccount(), system);
             userProcessContainer.add("UpdateUserJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -205,7 +205,7 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
         }
         else{
             DeliveryMan dm = (DeliveryMan)tblDeliveryManList.getValueAt(selectedRow, 1);
-            ecosystem.getDeliveryManDirectory().deleteDeliveryMan(dm);
+            system.getDeliveryManDirectory().deleteDeliveryMan(dm);
             JOptionPane.showMessageDialog(this, "DeliveryMan Account deleted successfully");
         } 
     }//GEN-LAST:event_btnDeleteActionPerformed

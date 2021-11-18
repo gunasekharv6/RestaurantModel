@@ -225,8 +225,8 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
   private void btnnewrestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnewrestaurantActionPerformed
     // TODO add your handling code here:
-    CreateNewRestaurantJPanel panel = new CreateNewRestaurantJPanel(userProcessContainer, system);
-    userProcessContainer.add("CreateNewRestaurantJPanel", panel);
+    AddorUpdateRestaurantJPanel panel = new AddorUpdateRestaurantJPanel(userProcessContainer, system);
+    userProcessContainer.add("AddorUpdateRestaurantJPanel", panel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
 
@@ -241,12 +241,12 @@ public class ManageRestaurantsJPanel extends javax.swing.JPanel {
 
     Restaurant rt = (Restaurant) tblRestaurantsList.getValueAt(selectedRow, 0);
     
-    UpdateRestaurantJPanel panel;
+    AddorUpdateRestaurantJPanel panel;
     if (rt.hasManager()){
         UserAccount ua = rt.getManager().getUseraccount();
-        panel = new UpdateRestaurantJPanel(userProcessContainer, rt, ua, system);
+        panel = new AddorUpdateRestaurantJPanel(userProcessContainer, rt, ua, system);
     }else{
-        panel = new UpdateRestaurantJPanel(userProcessContainer, rt, system);
+        panel = new AddorUpdateRestaurantJPanel(userProcessContainer, rt, system);
     }
     
     

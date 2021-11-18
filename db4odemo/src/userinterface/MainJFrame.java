@@ -8,6 +8,7 @@ import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.DeliveryMan.DeliveryManDirectory;
 
 import Business.Organization;
 import Business.Restaurant.Restaurant;
@@ -38,8 +39,10 @@ public class MainJFrame extends javax.swing.JFrame {
         system.setMasterUserAccountDirectory(new MasterUserAccountDirectory());
         CustomerDirectory custdir = new CustomerDirectory();
         RestaurantDirectory restdir = new RestaurantDirectory();
+        DeliveryManDirectory deliverymandir = new DeliveryManDirectory();
         system.setCustomerDirectory(custdir);
         system.setRestaurantDirectory(restdir);
+        system.setDeliveryManDirectory(deliverymandir);
         Restaurant restaurant = new Restaurant("Mela");
         restdir.addRestaurant(restaurant);
         custdir.addCustomer(new Customer("Abhi", "9848022338", restaurant, "abhi_1@gmail.com", "Hello@abhi"));
@@ -199,10 +202,13 @@ public class MainJFrame extends javax.swing.JFrame {
             CardLayout layout=(CardLayout)container.getLayout();
             container.add("workArea",loggedinuser.getRole().createWorkArea(container, loggedinuser, system));
             layout.next(container);
-            btnlogout.setEnabled(true);
-            btnlogin.setEnabled(false);
+            
             
             JOptionPane.showMessageDialog(this, "Login Successful");
+            btnlogout.setEnabled(true);
+            btnlogin.setEnabled(false);
+            txtuserName.setEnabled(false);
+            passwordField.setEnabled(false);
         }        
        
     }//GEN-LAST:event_btnloginActionPerformed
@@ -244,15 +250,23 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsignupActionPerformed
 
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnlogin.doClick();
-        }
+//        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            btnlogin.doClick();
+//        }
+
     }//GEN-LAST:event_passwordFieldKeyPressed
 
     private void txtuserNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuserNameKeyPressed
+//        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            passwordField.requestFocusInWindow();
+//        }
+
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            passwordField.requestFocusInWindow();
+            txtuserName.setText("sysadmin");
+            passwordField.setText("sysadmin");
+            btnlogin.doClick();
         }
+
     }//GEN-LAST:event_txtuserNameKeyPressed
 
     private void btnlogoutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnlogoutKeyPressed
