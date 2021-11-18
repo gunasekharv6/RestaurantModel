@@ -189,7 +189,7 @@ public class ManageDeliveryMenJPanel extends javax.swing.JPanel {
         }
         else{
             DeliveryMan dm = (DeliveryMan)tblDeliveryManList.getValueAt(selectedRow, 1);
-            UpdateDeliveryManJPanel panel = new UpdateDeliveryManJPanel(userProcessContainer,dm.getUseraccount());
+            UpdateDeliveryManJPanel panel = new UpdateDeliveryManJPanel(userProcessContainer,dm.getUseraccount(), ecosystem);
             userProcessContainer.add("UpdateUserJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

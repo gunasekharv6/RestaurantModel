@@ -28,14 +28,14 @@ public class UpdateDeliveryManJPanel extends javax.swing.JPanel {
     String organizationName;
     EcoSystem ecosystem;
 
-  UpdateDeliveryManJPanel(JPanel cardSequenceJPanel, UserAccount userAccount) {
+  UpdateDeliveryManJPanel(JPanel cardSequenceJPanel, UserAccount userAccount, EcoSystem system) {
     initComponents();
     txtUserName.setText(userAccount.getUsername());
     txtPassword.setText(userAccount.getPassword());
     txtEmployeeName.setText(userAccount.getEmployee().getName());
     this.cardSequenceJPanel = cardSequenceJPanel;
     this.userAccount = userAccount;
-//    this.ecosystem = ecosystem;
+    this.ecosystem = ecosystem;
     txtOrganizationType.setEnabled(false);
     txtEmployeeId.setEnabled(false);
     txtUserName.setEnabled(false);

@@ -41,7 +41,7 @@ public class CustomerDirectory {//extends UserAccountDirectory{
         }else{
             customerlist.remove(index);
             //super.deleteUserAccount(customer.getUsername());
-            JOptionPane.showMessageDialog(null, "Error!\nCustomer deleted successfully");
+            JOptionPane.showMessageDialog(null, "Customer deleted successfully");
             return true;
         } 
     }

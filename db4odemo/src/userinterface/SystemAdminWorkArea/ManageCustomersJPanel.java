@@ -19,13 +19,13 @@ import Business.UserAccount.UserAccount;
  */
 public class ManageCustomersJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
+    EcoSystem system;
 //  Organization customerOrg;
 
     public ManageCustomersJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
+        this.system = ecosystem;
     //    this.customerOrg = customerOrg;
         populateTable();
   }
@@ -34,11 +34,11 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         
         DefaultTableModel model = (DefaultTableModel) tblCustomerList.getModel();
         model.setRowCount(0);
-        //System.out.println(ecosystem.getCustomerDirectory().getCustomerlist());
-//    Organization organization2 = ecosystem.getCustomerDirectory().searchOrganization("Customer");
-        if(ecosystem.getCustomerDirectory()!=null){
+        //System.out.println(system.getCustomerDirectory().getCustomerlist());
+//    Organization organization2 = system.getCustomerDirectory().searchOrganization("Customer");
+        if(system.getCustomerDirectory()!=null){
             
-            for (Customer cu : ecosystem.getCustomerDirectory().getCustomerlist()){
+            for (Customer cu : system.getCustomerDirectory().getCustomerlist()){
 
                 Object row[] = new Object[3];
                 row[0] = cu;
@@ -193,7 +193,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
   private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
     // TODO add your handling code here:
-    CreateNewCustomerJPanel panel = new CreateNewCustomerJPanel(userProcessContainer, ecosystem);
+    CreateNewCustomerJPanel panel = new CreateNewCustomerJPanel(userProcessContainer, system);
     userProcessContainer.add("CreateNewCustomerJPanel", panel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
@@ -210,7 +210,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     } else {
         System.out.println("Inside Manage CustomersJPanel Update method");
         Customer cu = (Customer) tblCustomerList.getValueAt(selectedRow, 0);
-        UpdateUserJPanel panel = new UpdateUserJPanel(userProcessContainer, cu.getUseraccount());
+        UpdateUserJPanel panel = new UpdateUserJPanel(userProcessContainer, cu.getUseraccount(), system);
         userProcessContainer.add("UpdateUserJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -231,8 +231,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
       JOptionPane.showMessageDialog(null, "Please select a row");
       return;
     } 
-    Customer cu = (Customer) tblCustomerList.getValueAt(selectedRow, 1);
-    ecosystem.getCustomerDirectory().deleteCustomer(cu);
+    Customer cu = (Customer) tblCustomerList.getValueAt(selectedRow, 0);
+    system.getCustomerDirectory().deleteCustomer(cu);
     JOptionPane.showMessageDialog(null, "User Account deleted successfully");
 
     populateTable();

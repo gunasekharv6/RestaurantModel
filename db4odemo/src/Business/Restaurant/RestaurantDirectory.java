@@ -38,19 +38,23 @@ public class RestaurantDirectory {
     }
     
     public boolean checkIfRestaurantnameIsUnique(String restaurantname){
-        for (Restaurant ra : restaurantList){
-            if (ra.getRestaurantName().equals(restaurantname))
-                return false;
-        }
-        return true;
+        if (!restaurantList.isEmpty()){
+            for (Restaurant ra : restaurantList){
+                if (ra.getRestaurantName().equals(restaurantname))
+                    return false;
+            }
+            return true;
+        }return true;
     }
     
     public int checkIfRestaurantExists(String restaurantname){
-        for (Restaurant ra : restaurantList){
-            if (ra.getRestaurantName().equalsIgnoreCase(restaurantname))
-                return restaurantList.indexOf(ra);
-        }
-        return -1;
+        if (!restaurantList.isEmpty()){
+            for (Restaurant ra : restaurantList){
+                if (ra.getRestaurantName().equalsIgnoreCase(restaurantname))
+                    return restaurantList.indexOf(ra);
+            }
+            return -1;
+        }return -1;
     }
     
 }

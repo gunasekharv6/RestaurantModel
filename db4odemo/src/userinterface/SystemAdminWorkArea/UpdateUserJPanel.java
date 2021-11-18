@@ -27,7 +27,7 @@ public class UpdateUserJPanel extends javax.swing.JPanel {
   UserAccount userAccount;
   EcoSystem system;
 
-  UpdateUserJPanel(JPanel cardSequenceJPanel, UserAccount userAccount) {
+  UpdateUserJPanel(JPanel cardSequenceJPanel, UserAccount userAccount, EcoSystem system) {
     initComponents();
     txtusername.setText(userAccount.getUsername());
     txtPassword.setText(userAccount.getPassword());
@@ -36,7 +36,7 @@ public class UpdateUserJPanel extends javax.swing.JPanel {
     txtrestaurantname.setText(userAccount.getCustomer().getRestaurant().getRestaurantName());
     this.cardSequenceJPanel = cardSequenceJPanel;
     this.userAccount = userAccount;
-//    this.ecosystem = ecosystem;
+    this.system = system;
 
 
   }
@@ -158,20 +158,22 @@ public class UpdateUserJPanel extends javax.swing.JPanel {
     userAccount.getCustomer().setCustomerName(txtname.getText());
     userAccount.getCustomer().setPhoneNumber(txtphonenumber.getText());
     Restaurant restaurant;
-    int index = 0;
     if (system.getRestaurantDirectory().checkIfRestaurantnameIsUnique(txtrestaurantname.getText())){
         restaurant = new Restaurant(txtrestaurantname.getText());
         system.getRestaurantDirectory().addRestaurant(restaurant);
         
     }else{
-        index = system.getRestaurantDirectory().checkIfRestaurantExists(txtrestaurantname.getText());
+        int index = system.getRestaurantDirectory().checkIfRestaurantExists(txtrestaurantname.getText());
         restaurant = system.getRestaurantDirectory().getRestaurantList().get(index);
     }
     userAccount.getCustomer().setRestaurant(restaurant);
-    txtPassword.setEnabled(false);
-    txtusername.setEnabled(false);
-    txtphonenumber.setEnabled(false);
-    btnSave.setEnabled(false);
+    
+    JOptionPane.showMessageDialog(this, "Updated Successfully");
+    
+//    txtPassword.setEnabled(false);
+//    txtusername.setEnabled(false);
+//    txtphonenumber.setEnabled(false);
+//    btnSave.setEnabled(false);
   }//GEN-LAST:event_btnSaveActionPerformed
 
   private boolean usernamePatternCorrect() {
@@ -195,7 +197,7 @@ public class UpdateUserJPanel extends javax.swing.JPanel {
 
   private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
     // TODO add your handling code here:
-
+    
     cardSequenceJPanel.remove(this);
     CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
     layout.previous(cardSequenceJPanel);
