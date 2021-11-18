@@ -43,8 +43,16 @@ public class Restaurant extends Organization{
 //        this.roles
     }
     
+    public boolean hasManager(){
+        if (super.getEmployeeDirectory().getEmployeeList().isEmpty()){
+            return false;
+        }return true;
+    }
+    
     public Employee getManager(){
-        return super.getEmployeeDirectory().getEmployeeList().get(0);
+        if (hasManager()){
+            return super.getEmployeeDirectory().getEmployeeList().get(0);
+        }return null;
     }
     
     public void setManager(Employee manager){
@@ -104,4 +112,11 @@ public class Restaurant extends Organization{
     public void setCuisineType(String cuisineType) {
         this.cuisineType = cuisineType;
     }    
+
+    @Override
+    public String toString() {
+        return getRestaurantName();
+    }
+    
+    
 }

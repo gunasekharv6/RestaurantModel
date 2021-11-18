@@ -28,6 +28,19 @@ public class RestaurantDirectory {
         }        
     }
     
+    public boolean deleteRestaurant(Restaurant restaurant){
+        int index = checkIfRestaurantExists(restaurant.getRestaurantName());
+        if(index == -1){
+            JOptionPane.showMessageDialog(null, "Error!\nRestaurant not present in the Restaurant directory");
+            return false;
+        }else{
+            restaurantList.remove(index);
+            //super.deleteUserAccount(customer.getUsername());
+            JOptionPane.showMessageDialog(null, "Restaurant deleted successfully");
+            return true;
+        } 
+    }
+    
     
     public List<Restaurant> getRestaurantList() {
         return restaurantList;
@@ -40,7 +53,7 @@ public class RestaurantDirectory {
     public boolean checkIfRestaurantnameIsUnique(String restaurantname){
         if (!restaurantList.isEmpty()){
             for (Restaurant ra : restaurantList){
-                if (ra.getRestaurantName().equals(restaurantname))
+                if (ra.getRestaurantName().equalsIgnoreCase(restaurantname))
                     return false;
             }
             return true;

@@ -6,6 +6,7 @@ package Business;
 
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Employee.Employee;
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.MasterUserAccountDirectory;
@@ -27,7 +28,7 @@ public abstract class Organization {
     private EmployeeDirectory employeeDirectory;
     private CustomerDirectory custDirectory;
     private DeliveryManDirectory deliveryManDirectory;
-    private UserAccountDirectory userAccountDirectory;
+    private UserAccountDirectory orgUserAccountDirectory;
     
     private int organizationID;
     private static int counter=0;
@@ -51,9 +52,10 @@ public abstract class Organization {
         this.name = name;
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
+        employeeDirectory.getEmployeeList().add(new Employee());
         custDirectory = new CustomerDirectory();
         deliveryManDirectory = new DeliveryManDirectory();
-//        userAccountDirectory = new UserAccountDirectory();
+//        orgUserAccountDirectory = new UserAccountDirectory();
         organizationID = counter;
         ++counter;
     }
@@ -71,7 +73,7 @@ public abstract class Organization {
 //    public abstract ArrayList<Role> getSupportedRole();
 //    
 ////    public UserAccountDirectory getUserAccountDirectory() {
-////        return userAccountDirectory;
+////        return orgUserAccountDirectory;
 ////    }
 
     public CustomerDirectory getCustDirectory() {
@@ -130,12 +132,12 @@ public abstract class Organization {
         return name;
     }
 
-    public UserAccountDirectory getUserAccountDirectory() {
-        return userAccountDirectory;
+    public UserAccountDirectory getOrgUserAccountDirectory() {
+        return orgUserAccountDirectory;
     }
 
-    public void setUserAccountDirectory(UserAccountDirectory userAccountDirectory) {
-        this.userAccountDirectory = userAccountDirectory;
+    public void setOrgUserAccountDirectory(UserAccountDirectory orgUserAccountDirectory) {
+        this.orgUserAccountDirectory = orgUserAccountDirectory;
     }
     
     
