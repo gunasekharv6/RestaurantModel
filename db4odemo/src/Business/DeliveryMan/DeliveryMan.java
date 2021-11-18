@@ -27,6 +27,7 @@ public class DeliveryMan {
 //        this.Address = Address;
 //        this.restaurant = restaurant;
         useraccount = new UserAccount(username, password, new DeliverManRole());
+        useraccount.setDeliverman(this);
     }
 
     public String getDeliveryManName() {

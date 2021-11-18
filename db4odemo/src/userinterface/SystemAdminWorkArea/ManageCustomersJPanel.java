@@ -12,7 +12,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Business.EcoSystem;
-import Business.Organization;
 import Business.UserAccount.UserAccount;
 
 /**
@@ -61,12 +60,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustomerList = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTableTitle = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
+        btnreload = new javax.swing.JButton();
 
         tblCustomerList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,9 +76,16 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 "Name", "UserName", "Password"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -86,13 +93,13 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCustomerList);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Customer List");
+        lblTableTitle.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblTableTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTableTitle.setText("Customer List");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Customers");
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Manage Customers");
 
         btnCreate.setText("Create>>");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +122,17 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnback.setText("back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnbackActionPerformed(evt);
+            }
+        });
+
+        btnreload.setText("Reload");
+        btnreload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreloadActionPerformed(evt);
             }
         });
 
@@ -130,48 +144,56 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnback)
                         .addGap(142, 142, 142)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(365, 365, 365))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(83, 83, 83))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(82, 82, 82)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87)
+                                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addComponent(btnreload))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(83, Short.MAX_VALUE))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCreate, btnreload});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
+                    .addComponent(btnback)
+                    .addComponent(lblTitle))
                 .addGap(53, 53, 53)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTableTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnreload))
                 .addGap(273, 273, 273))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCreate, btnreload});
+
     }// </editor-fold>//GEN-END:initComponents
 
   private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
     // TODO add your handling code here:
     CreateNewCustomerJPanel panel = new CreateNewCustomerJPanel(userProcessContainer, ecosystem);
-//          userProcessContainer.remove(this);
     userProcessContainer.add("CreateNewCustomerJPanel", panel);
     CardLayout layout = (CardLayout) userProcessContainer.getLayout();
     layout.next(userProcessContainer);
@@ -180,24 +202,23 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
 
 
   private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-    // TODO add your handling code here:
-//    int selectedRow = tblCustomerList.getSelectedRow();
-//    if (selectedRow < 0) {
-//      JOptionPane.showMessageDialog(null, "Please select a row");
-//      return;
-//    } else {
-//      UserAccount ua = (UserAccount) tblCustomerList.getValueAt(selectedRow, 1);
-//      UpdateUserJPanel panel = new UpdateUserJPanel(userProcessContainer, ua, "Customers");
-//      userProcessContainer.add("UpdateUserJPanel", panel);
-//      CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//      layout.next(userProcessContainer);
-//    }
+
+    int selectedRow = tblCustomerList.getSelectedRow();
+    if (selectedRow < 0) {
+      JOptionPane.showMessageDialog(null, "Please select a row");
+      return;
+    } else {
+        System.out.println("Inside Manage CustomersJPanel Update method");
+        Customer cu = (Customer) tblCustomerList.getValueAt(selectedRow, 0);
+        UpdateUserJPanel panel = new UpdateUserJPanel(userProcessContainer, cu.getUseraccount());
+        userProcessContainer.add("UpdateUserJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }
   }                                         
 
 
-  private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
-    // :event_btnUpdateActionPerformed
-    // TODO add your handling code here:
+  private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {
     populateTable();
     tblCustomerList.revalidate();
     tblCustomerList.repaint();
@@ -224,7 +245,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     this.repaint();
   }//GEN-LAST:event_btnDeleteActionPerformed
 
-  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+  private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
     // TODO add your handling code here:
 
     userProcessContainer.remove(this);
@@ -238,17 +259,24 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         systemAdminWorkAreaJPanel.populateTree();
       }
     }
-  }//GEN-LAST:event_jButton1ActionPerformed
+  }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btnreloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreloadActionPerformed
+        populateTable();
+        tblCustomerList.revalidate();
+        tblCustomerList.repaint();
+    }//GEN-LAST:event_btnreloadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnback;
+    private javax.swing.JButton btnreload;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTableTitle;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblCustomerList;
     // End of variables declaration//GEN-END:variables
 }

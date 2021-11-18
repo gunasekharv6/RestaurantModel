@@ -28,7 +28,18 @@ public class Customer{ //extends UserAccount{
 //        this.Address = Address;
         this.restaurant = restaurant;
         useraccount = new UserAccount(username, password, new CustomerRole());
+        useraccount.setCustomer(this);
     }
+    
+    public Customer(String customerName, String phoneNumber, String username, String password) {
+        
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        useraccount = new UserAccount(username, password, new CustomerRole());
+        useraccount.setCustomer(this);
+    }
+    
+
 
     public String getCustomerName() {
         return customerName;
@@ -50,18 +61,6 @@ public class Customer{ //extends UserAccount{
     public Role getRole() {
         return useraccount.getRole(); //To change body of generated methods, choose Tools | Templates.
     }
-
-
-//    public String getPassword() {
-//        return useraccount.getPassword(); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//
-//    public String getUsername() {
-//        return useraccount.getUsername(); //To change body of generated methods, choose Tools | Templates.
-//    }
-//    
-    
     
     public Restaurant getRestaurant() {
         return restaurant;
@@ -79,16 +78,8 @@ public class Customer{ //extends UserAccount{
         this.useraccount = useraccount;
     }
     
-    
-    
-
     @Override
     public String toString() {
         return this.customerName; //To change body of generated methods, choose Tools | Templates.
     }
-
-
-    
-    
-    
 }

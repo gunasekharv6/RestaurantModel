@@ -4,7 +4,10 @@
  */
 package Business.UserAccount;
 
+import Business.Customer.Customer;
+import Business.DeliveryMan.DeliveryMan;
 import Business.Employee.Employee;
+import Business.Role.RestaurantManagerRole;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
 
@@ -17,6 +20,8 @@ public class UserAccount {
     private String username;
     private String password;
     private Employee employee;
+    private Customer customer;
+    private DeliveryMan deliverman;
     private Role role;
     private WorkQueue workQueue;
 
@@ -29,6 +34,22 @@ public class UserAccount {
 
     public UserAccount() {
         workQueue = new WorkQueue();
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public DeliveryMan getDeliverman() {
+        return deliverman;
+    }
+
+    public void setDeliverman(DeliveryMan deliverman) {
+        this.deliverman = deliverman;
     }
     
     

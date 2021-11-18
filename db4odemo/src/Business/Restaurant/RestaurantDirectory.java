@@ -20,7 +20,7 @@ public class RestaurantDirectory {
     public boolean addRestaurant(Restaurant restaurant){
         if(checkIfRestaurantnameIsUnique(restaurant.getRestaurantName())){
             restaurantList.add(restaurant);
-            JOptionPane.showMessageDialog(null, "Restaurant is added successfully");
+            //JOptionPane.showMessageDialog(null, "Restaurant is added successfully");
             return true;
         }else{
             JOptionPane.showMessageDialog(null, "Error!\nRestaurant is already present in the Restaurant directory");
@@ -43,6 +43,14 @@ public class RestaurantDirectory {
                 return false;
         }
         return true;
+    }
+    
+    public int checkIfRestaurantExists(String restaurantname){
+        for (Restaurant ra : restaurantList){
+            if (ra.getRestaurantName().equalsIgnoreCase(restaurantname))
+                return restaurantList.indexOf(ra);
+        }
+        return -1;
     }
     
 }

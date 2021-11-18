@@ -4,11 +4,13 @@
  */
 package userinterface;
 
+import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
 
 import Business.Organization;
+import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.MasterUserAccountDirectory;
 import Business.UserAccount.UserAccount;
@@ -34,8 +36,13 @@ public class MainJFrame extends javax.swing.JFrame {
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
         system.setMasterUserAccountDirectory(new MasterUserAccountDirectory());
-        system.setCustomerDirectory(new CustomerDirectory());
-        system.setRestaurantDirectory(new RestaurantDirectory());
+        CustomerDirectory custdir = new CustomerDirectory();
+        RestaurantDirectory restdir = new RestaurantDirectory();
+        system.setCustomerDirectory(custdir);
+        system.setRestaurantDirectory(restdir);
+        Restaurant restaurant = new Restaurant("Mela");
+        restdir.addRestaurant(restaurant);
+        custdir.addCustomer(new Customer("Abhi", "9848022338", restaurant, "abhi_1@gmail.com", "Hello@abhi"));
     }
 
     /**

@@ -25,6 +25,15 @@ public class Restaurant extends Organization{
     
     private ArrayList<Role> supportedRoles;
 
+    
+    public Restaurant(String name) {
+        super(name);
+        supportedRoles = new ArrayList();
+        this.supportedRoles.add(new RestaurantManagerRole());
+//        this.restaurantName = name;
+//        this.roles
+    }
+    
     public Restaurant(String name, String managerName) {
         super(name);
         super.getEmployeeDirectory().getEmployeeList().add(0, new Employee(managerName));

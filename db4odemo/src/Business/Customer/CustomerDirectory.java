@@ -25,7 +25,7 @@ public class CustomerDirectory {//extends UserAccountDirectory{
         if(checkIfcustomernameExists(customer.getCustomerName()) == -1){
             customerlist.add(customer);
             //super.createUserAccount(customer.getUsername(), customer.getPassword(), customer.getRole());
-            JOptionPane.showMessageDialog(null, "Customer is added successfully");
+            //JOptionPane.showMessageDialog(null, "Customer is added successfully");
             return true;
         }else{
             JOptionPane.showMessageDialog(null, "Error!\nCustomer is already present in the Customer directory");
