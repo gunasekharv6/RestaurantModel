@@ -4,6 +4,7 @@
  */
 package Business.Employee;
 
+import Business.Restaurant.Restaurant;
 import Business.Role.RestaurantManagerRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -16,6 +17,7 @@ public class Employee{// extends UserAccount{
     
     private String name;
     private UserAccount useraccount;
+    private Restaurant restaurant;
     private int id;
     private static int count = 1;
 
@@ -23,6 +25,7 @@ public class Employee{// extends UserAccount{
         id = count;
         count++;
         useraccount = new UserAccount();
+        useraccount.setEmployee(this);
     }
     
     public Employee(String name) {
@@ -44,6 +47,14 @@ public class Employee{// extends UserAccount{
 
     public void setUseraccount(UserAccount useraccount) {
         this.useraccount = useraccount;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
     
     

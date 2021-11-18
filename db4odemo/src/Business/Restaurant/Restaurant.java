@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Restaurant extends Organization{
 //    private String restaurantName;
     private String address;
-
+    private Employee manager;
     private String cuisineType;
     
     private ArrayList<Role> supportedRoles;
@@ -29,25 +29,25 @@ public class Restaurant extends Organization{
     public Restaurant(String name) {
         super(name);
         supportedRoles = new ArrayList();
+        manager = new Employee();
         this.supportedRoles.add(new RestaurantManagerRole());
-//        this.restaurantName = name;
-//        this.roles
     }
     
     public Restaurant(String name, String managerName) {
         super(name);
         super.getEmployeeDirectory().getEmployeeList().add(0, new Employee(managerName));
+        
         supportedRoles = new ArrayList();
         this.supportedRoles.add(new RestaurantManagerRole());
-//        this.restaurantName = name;
-//        this.roles
     }
+   
     
     public boolean hasManager(){
         if (super.getEmployeeDirectory().getEmployeeList().isEmpty()){
             return false;
         }return true;
     }
+    
     
     public Employee getManager(){
         if (hasManager()){
