@@ -21,6 +21,7 @@ import java.util.ArrayList;
  */
 public class EcoSystem extends Organization{
     
+    private String ecosystemName;
     private static EcoSystem business;
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
@@ -41,8 +42,18 @@ public class EcoSystem extends Organization{
         }
         return business;
     }
-    
 
+    public String getEcosystemName() {
+        return ecosystemName;
+    }
+
+    public void setEcosystemName(String ecosystemName) {
+        this.ecosystemName = ecosystemName;
+    }
+    
+    
+    
+    
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList=new ArrayList<Role>();
         roleList.add(new SystemAdminRole());

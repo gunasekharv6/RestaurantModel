@@ -17,18 +17,21 @@ import Business.UserAccount.UserAccount;
 public class DeliveryMan {
     private String deliveryManName;
     private String phoneNumber;
-//    private String Address;
+    private String Address;
     private Restaurant restaurant;
     private UserAccount useraccount;
 
-    public DeliveryMan(String name, String username, String password) {
+    public DeliveryMan(String name, String username, String password, Restaurant restaurant) {
         this.deliveryManName = name;
-//        this.phoneNumber = phoneNumber;
+        this.phoneNumber = "";
 //        this.Address = Address;
-//        this.restaurant = restaurant;
+        this.restaurant = restaurant;
         useraccount = new UserAccount(username, password, new DeliverManRole());
         useraccount.setDeliverman(this);
     }
+    
+    
+        
 
     public String getDeliveryManName() {
         return this.deliveryManName;
@@ -74,6 +77,11 @@ public class DeliveryMan {
 
     public void setUseraccount(UserAccount useraccount) {
         this.useraccount = useraccount;
+    }
+
+    @Override
+    public String toString() {
+        return getDeliveryManName();
     }
     
     

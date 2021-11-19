@@ -9,6 +9,7 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
+import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -23,16 +24,25 @@ import javax.swing.JPanel;
  *
  * @author gunav
  */
-public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
+public class CreateDeliveryManJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CreateNewManagerJPanel
      */
     JPanel cardSequenceJPanel;
     EcoSystem system;
+    Restaurant restaurant;
+    UserAccount useraccount;
   
     
-    public CreateNewDeliveryManJPanel(JPanel cardSequenceJPanel,EcoSystem system) {
+    public CreateDeliveryManJPanel(JPanel cardSequenceJPanel, UserAccount useraccount, EcoSystem system) {
+        initComponents();
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.system=system;
+        this.useraccount = useraccount;
+    }
+    
+    public CreateDeliveryManJPanel(JPanel cardSequenceJPanel,EcoSystem system) {
         initComponents();
         this.cardSequenceJPanel = cardSequenceJPanel;
         this.system=system;
@@ -58,12 +68,14 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtrestaurantname = new javax.swing.JTextField();
+        lblphonenumber = new javax.swing.JLabel();
+        txtphonenumber = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create New Delivery Man");
+        jLabel1.setText("Create Delivery Man");
 
-        btnCreate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCreate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnCreate.setText("Create ");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,15 +90,15 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("DeliveryMan Name");
+        jLabel4.setText("Delivery Man Name");
 
-        UsrNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        UsrNameLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         UsrNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         UsrNameLabel.setText("UserName");
 
-        passwordLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        passwordLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         passwordLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passwordLabel.setText("Password");
 
@@ -96,50 +108,43 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Restaurant Name");
+
+        lblphonenumber.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblphonenumber.setText("Phone Number");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(208, 208, 208)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(36, 36, 36)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(UsrNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtrestaurantname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(56, 56, 56)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
+                                .addComponent(lblphonenumber)
+                                .addComponent(jLabel4)
+                                .addComponent(UsrNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9)))
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(306, 306, 306))
+                            .addComponent(txtDeliveryManName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtrestaurantname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtphonenumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDeliveryManName, txtrestaurantname});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDeliveryManName, txtphonenumber, txtrestaurantname});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +152,8 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(btnBack))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtrestaurantname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,25 +163,31 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
                     .addComponent(txtDeliveryManName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsrNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblphonenumber)
+                    .addComponent(txtphonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsrNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(btnCreate)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDeliveryManName, txtrestaurantname});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDeliveryManName, txtphonenumber, txtrestaurantname});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, lblphonenumber});
 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
         for(DeliveryMan dm : system.getDeliveryManDirectory().getDeliveryManList()){
-            if(dm.getUseraccount().getUsername().equalsIgnoreCase(txtUserName.getText())){
+            if(dm.getUseraccount().getUsername().equals(txtUserName.getText())){
                 JOptionPane.showMessageDialog(null, "Username should be unique. UserName is already in use.");
                 return;
             }
@@ -202,10 +213,21 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
         String deliverymanName=txtDeliveryManName.getText();
         String userName=txtUserName.getText();
         String password=txtPassword.getText();
-        DeliveryMan dm = new DeliveryMan(userName, userName, password);
+        String restaurantName = txtrestaurantname.getText();
+        String phonenumber = txtphonenumber.getText();
+        Restaurant restaurant;
+        int index = system.getRestaurantDirectory().checkIfRestaurantExists(restaurantName);
+        if (index >= 0){
+            restaurant = system.getRestaurantDirectory().getRestaurantList().get(index);
+        }else{
+            restaurant = new Restaurant(restaurantName);
+            system.getRestaurantDirectory().addRestaurant(restaurant);
+        }
+        DeliveryMan dm = new DeliveryMan(deliverymanName, userName, password, restaurant);
+        dm.setPhoneNumber(phonenumber);
         system.getDeliveryManDirectory().addDeliveryMan(dm);
 
-        JOptionPane.showMessageDialog(null, "Delivery Man added successfully");
+        //JOptionPane.showMessageDialog(null, "Delivery Man added successfully");
     }//GEN-LAST:event_btnCreateActionPerformed
   
     private boolean usernameRegexCorrect(){
@@ -248,10 +270,12 @@ public class CreateNewDeliveryManJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblphonenumber;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField txtDeliveryManName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;
+    private javax.swing.JTextField txtphonenumber;
     private javax.swing.JTextField txtrestaurantname;
     // End of variables declaration//GEN-END:variables
 }
