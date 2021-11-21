@@ -28,6 +28,14 @@ public class Employee{// extends UserAccount{
         useraccount.setEmployee(this);
     }
     
+    public Employee(UserAccount useraccount, Restaurant rt) {
+        id = count;
+        count++;
+        this.useraccount = useraccount;
+        useraccount.setEmployee(this);
+        this.restaurant = rt;
+    }
+    
     public Employee(String name) {
         this.name = name;
         id = count;
@@ -41,6 +49,9 @@ public class Employee{// extends UserAccount{
         useraccount = new UserAccount(username, password, role);
     }
 
+    
+    
+    
     public UserAccount getUseraccount() {
         return useraccount;
     }

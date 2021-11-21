@@ -86,19 +86,19 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnplaceNewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnplaceNewOrderActionPerformed
         
-//        PlaceOrderJPanel panel = new PlaceOrderJPanel(userProcessContainer, userAccount, system);
-//        userProcessContainer.add("PlaceOrderJPanel", panel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        PlaceOrderJPanel panel = new PlaceOrderJPanel(userProcessContainer, userAccount, system);
+        userProcessContainer.add("PlaceOrderJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
     }//GEN-LAST:event_btnplaceNewOrderActionPerformed
 
     private void btntrackordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntrackordersActionPerformed
         
-//        TrackOrderJPanel panel = new TrackOrderJPanel(userProcessContainer, userAccount, system);
-//        userProcessContainer.add("CancelOrderJPanel", panel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        TrackOrderJPanel panel = new TrackOrderJPanel(userProcessContainer, userAccount, system);
+        userProcessContainer.add("CancelOrderJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btntrackordersActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

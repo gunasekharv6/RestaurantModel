@@ -4,6 +4,7 @@
  */
 package Business.Role;
 
+import Business.Customer.Customer;
 import Business.EcoSystem;
 
 import Business.Organization;
@@ -18,8 +19,12 @@ import userinterface.CustomerRole.CustomerAreaJPanel;
  */
 public class CustomerRole extends Role{
 
+    private Customer customer;
     
+    @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
+        this.customer = new Customer("", "", account.getUsername(), account.getPassword());
+        account.setCustomer(customer);
         return new CustomerAreaJPanel(userProcessContainer, account, business);
     }
     

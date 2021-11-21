@@ -9,6 +9,8 @@ import Business.Restaurant.Restaurant;
 import Business.Role.DeliverManRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import OrderDirectory.Order;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,19 +22,56 @@ public class DeliveryMan {
     private String Address;
     private Restaurant restaurant;
     private UserAccount useraccount;
+    private int id;
+    private static int count = 1;
+    private ArrayList<Order> orderList;
 
     public DeliveryMan(String name, String username, String password, Restaurant restaurant) {
+        id = count;
+        count++;
         this.deliveryManName = name;
         this.phoneNumber = "";
 //        this.Address = Address;
         this.restaurant = restaurant;
         useraccount = new UserAccount(username, password, new DeliverManRole());
         useraccount.setDeliverman(this);
+        orderList = new ArrayList<Order>();
     }
     
     
-        
+    public DeliveryMan(String name, String username, String password) {
+        id = count;
+        count++;
+        this.deliveryManName = name;
+        this.phoneNumber = "";
+//        this.Address = Address;
+        useraccount = new UserAccount(username, password, new DeliverManRole());
+        useraccount.setDeliverman(this);
+        orderList = new ArrayList<Order>();
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void addOrder(Order order){
+        this.orderList.add(order);
+        order.setDeliveryMan(this);
+    }
+
+    public ArrayList<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(ArrayList<Order> orderList) {
+        this.orderList = orderList;
+    }
+        
+    
     public String getDeliveryManName() {
         return this.deliveryManName;
     }

@@ -7,6 +7,7 @@ package Business;
 
 
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
@@ -25,16 +26,20 @@ public class EcoSystem extends Organization{
     private static EcoSystem business;
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
-    private DeliveryManDirectory deliveryManDirectory;
+    //private DeliveryManDirectory deliveryManDirectory;
     private MasterUserAccountDirectory masterUserAccountDirectory;
 
     public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, MasterUserAccountDirectory masterUserAccountDirectory) {
 
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
-        this.deliveryManDirectory = deliveryManDirectory;
+        //this.deliveryManDirectory = deliveryManDirectory;
         this.masterUserAccountDirectory = masterUserAccountDirectory;
     }
+    
+//    public void addDeliveryMan(DeliveryMan dm){
+//        this.deliveryManDirectory.getDeliveryManList().add(dm);
+//    }
     
     public static EcoSystem getInstance(){
         if(business==null){
@@ -93,13 +98,13 @@ public class EcoSystem extends Organization{
         this.customerDirectory = customerDirectory;
     }
 
-    public DeliveryManDirectory getDeliveryManDirectory() {
-        return deliveryManDirectory;
-    }
-
-    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
-        this.deliveryManDirectory = deliveryManDirectory;
-    }
+//    public DeliveryManDirectory getDeliveryManDirectory() {
+//        return deliveryManDirectory;
+//    }
+//
+//    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
+//        this.deliveryManDirectory = deliveryManDirectory;
+//    }
 
     public MasterUserAccountDirectory getMasterUserAccountDirectory() {
         return masterUserAccountDirectory;

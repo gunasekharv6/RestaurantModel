@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package OrderDirectory;
 
 
+import Business.Customer.Customer;
+import Business.DeliveryMan.DeliveryMan;
 import Business.Restaurant.Item;
+import Business.Restaurant.Item;
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
 import static java.lang.Integer.toString;
 import java.util.ArrayList;
 
@@ -17,14 +22,13 @@ import java.util.ArrayList;
 public class Order {
     private int orderId;
     private static int counter=1;
-    private String restaurantName;
+    private Restaurant restaurant;
     private String status;
-    private String deliveryManName;
-    private String deliveryManUserName;
-    private String customerName;
+    private DeliveryMan deliveryMan;
+    private UserAccount deliveryManUseraccount;
     private int customerId;
     private int deliveryManId;
-    private String  customerUserName;
+    private Customer customer;
     private ArrayList<Item> itemsList;
     private String customerNotes;
     private String feedback;
@@ -34,6 +38,15 @@ public class Order {
         ++counter;
         itemsList=new ArrayList<Item>();
         status = "N/A";
+    }
+    
+    
+    public String getOrderPrice(){
+        int price = 0;
+        for (Item i : itemsList){
+            price = price + i.getPrice();
+        }
+        return String.valueOf(price);
     }
 
     public String getFeedback() {
@@ -68,20 +81,24 @@ public class Order {
         this.customerNotes = customerNotes;
     }
 
-    public String getDeliveryManUserName() {
-        return deliveryManUserName;
+    public UserAccount getDeliveryManUseraccount() {
+        return deliveryManUseraccount;
     }
 
-    public void setDeliveryManUserName(String deliveryManUserName) {
-        this.deliveryManUserName = deliveryManUserName;
+
+    public void setDeliveryManUseraccount(UserAccount deliveryManUseraccount) {
+        this.deliveryManUseraccount = deliveryManUseraccount;
     }
 
-    public String getCustomerUserName() {
-        return customerUserName;
+    
+    
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerUserName(String customerUserName) {
-        this.customerUserName = customerUserName;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        customer.addOrder(this);
     }
 
       
@@ -110,12 +127,13 @@ public class Order {
         Order.counter = counter;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+        restaurant.addOrder(this);
     }
 
     public String getStatus() {
@@ -126,21 +144,15 @@ public class Order {
         this.status = status;
     }
 
-    public String getDeliveryManName() {
-        return deliveryManName;
+    public DeliveryMan getDeliveryMan() {
+        return deliveryMan;
     }
 
-    public void setDeliveryManName(String deliveryManName) {
-        this.deliveryManName = deliveryManName;
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
+        this.deliveryMan = deliveryMan;
+        deliveryMan.addOrder(this);
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
 
     public Item addItem(){
         Item item = new Item(); 

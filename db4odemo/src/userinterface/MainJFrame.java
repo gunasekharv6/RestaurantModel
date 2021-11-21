@@ -36,16 +36,40 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
-        system.setMasterUserAccountDirectory(new MasterUserAccountDirectory());
-        CustomerDirectory custdir = new CustomerDirectory();
-        RestaurantDirectory restdir = new RestaurantDirectory();
-        DeliveryManDirectory deliverymandir = new DeliveryManDirectory();
-        system.setCustomerDirectory(custdir);
-        system.setRestaurantDirectory(restdir);
-        system.setDeliveryManDirectory(deliverymandir);
-        Restaurant restaurant = new Restaurant("Mela");
-        restdir.addRestaurant(restaurant);
-        custdir.addCustomer(new Customer("Abhi", "9848022338", restaurant, "abhi_1@gmail.com", "Hello@abhi"));
+        system.setMasterUserAccountDirectory(new MasterUserAccountDirectory(system));
+        CustomerDirectory custdir;
+        if(system.getCustomerDirectory().getCustomerlist().size()==0){
+             custdir = new CustomerDirectory();
+             system.setCustomerDirectory(custdir);
+        }else{
+            custdir = system.getCustomerDirectory();
+        }
+
+        
+//        DeliveryManDirectory deliverymandir;
+//        if(system.getDeliveryManDirectory().getDeliveryManList().size()==0){
+//            deliverymandir = new DeliveryManDirectory();
+//            system.setDeliveryManDirectory(deliverymandir);
+//        }else{
+//            deliverymandir = system.getDeliveryManDirectory();
+//        }
+        
+        Restaurant restaurant=null;
+        
+        
+        if(system.getRestaurantDirectory().getRestaurantList().size()==0){
+            RestaurantDirectory restdir = new RestaurantDirectory();
+            system.setRestaurantDirectory(restdir);
+            restaurant = new Restaurant("Mela");
+            restaurant.addItem("chicken biryani", 10);
+            restaurant.addItem("veg biryani", 12);
+            restdir.addRestaurant(restaurant);
+        }else{
+            restaurant=system.getRestaurantDirectory().getRestaurantList().get(0);
+        }
+        
+
+        //custdir.addCustomer(new Customer("Abhi", "9848022338", restaurant, "abhi_1@gmail.com", "Hello@abhi"));
     }
 
     /**

@@ -5,8 +5,13 @@
  */
 package Business.UserAccount;
 
+import Business.DeliveryMan.DeliveryMan;
+import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Restaurant.Restaurant;
 import Business.Role.CustomerRole;
+import Business.Role.DeliverManRole;
+import Business.Role.RestaurantManagerRole;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
@@ -19,11 +24,25 @@ import javax.swing.JOptionPane;
 public class MasterUserAccountDirectory {
     
     private ArrayList<UserAccount> masterUserAccountList;
+    private EcoSystem system;
 
-    public MasterUserAccountDirectory() {
+    public MasterUserAccountDirectory(EcoSystem system) {
+        this.system = system;
         this.masterUserAccountList = new ArrayList();
         this.masterUserAccountList.add(new UserAccount("sysadmin", "sysadmin", new SystemAdminRole()));
         this.masterUserAccountList.add(new UserAccount("user1", "user1", new CustomerRole()));
+        
+        UserAccount restrntMngraccount =  new UserAccount("rest1", "rest1", new RestaurantManagerRole());
+        this.masterUserAccountList.add(restrntMngraccount);
+        Restaurant rt = system.getRestaurantDirectory().getRestaurantList().get(0);//new Restaurant("Mela");//
+        Employee emp = new Employee(restrntMngraccount, rt);
+        
+        DeliveryMan deliveryman =  new DeliveryMan("akash", "delv1", "delv1");
+        this.masterUserAccountList.add(deliveryman.getUseraccount());
+        deliveryman.setRestaurant(rt);
+//        this.system.getDeliveryManDirectory().getDeliveryManList().add(deliveryman);
+        
+//        Employee employee = new Employee(restrntMngraccount, "Mela");
     }
     
 

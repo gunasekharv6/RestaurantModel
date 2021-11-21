@@ -30,6 +30,8 @@ public class UserAccount {
         this.password = password;
         this.role = role;
         workQueue = new WorkQueue();
+
+        //this.customer = new Customer(username, "", username, password);
     }
 
     public UserAccount() {
@@ -50,6 +52,7 @@ public class UserAccount {
 
     public void setDeliverman(DeliveryMan deliverman) {
         this.deliverman = deliverman;
+        deliverman.setUseraccount(this);
     }
     
     
