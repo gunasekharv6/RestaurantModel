@@ -5,14 +5,17 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.CityName;
+import Business.CityNetwork;
 import Business.EcoSystem;
-
-import Business.Organization;
+import Business.SysAdmin.SysAdmin;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,19 +27,53 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form SystemAdminWorkAreaJPanel
      */
     JPanel userProcessContainer;
-    EcoSystem system;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
+    EcoSystem ecosystem;
+    UserAccount userLogged;
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem,UserAccount userLogged) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
-        this.system=ecosystem;
-        populateTree();
+        this.ecosystem=ecosystem;
+        this.userLogged=userLogged;
+        populateCities();
+        populateSysAdmins();
     }
     
-    public void populateTree(){
-        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
-       // Add the code for draw your system structure shown by JTree
-       
-        model.reload();
+    private void populateCities() {
+        
+        List<CityNetwork> cityNetworks = ecosystem.getCityNetworks();
+        cityjComboBox.removeAllItems();
+        for(CityNetwork cityNetwork:cityNetworks){
+            cityjComboBox.addItem(cityNetwork.getCityName().name());
+        }
+        
+        addCityjComboBox.removeAllItems();
+        for(String cityName:CityName.getCitiesList()){
+            addCityjComboBox.addItem(cityName);
+        }
+        addCityjComboBox.setSelectedIndex(addCityjComboBox.getItemCount()-1);
+    }
+    
+    public void populateSysAdmins() {
+        
+        DefaultTableModel sysAdminsModel = (DefaultTableModel) sysAdminsjTable.getModel();
+        sysAdminsModel.setRowCount(0);
+        
+        int sysAdminsCount=0;
+        for(SysAdmin sysAdmin:ecosystem.getSysAdminDirectory().getSysAdmins()) {
+            sysAdminsCount++;
+            Object[] row = new Object[8];
+            row[0]=sysAdminsCount;
+            row[1]=sysAdmin;
+            row[2]=sysAdmin.getUserName();
+            row[3]=sysAdmin.getPassword();
+            row[4]=sysAdmin.getEmail();
+            row[5]=sysAdmin.getPhoneNo();
+            row[6]=sysAdmin.getCreatedBy();
+            row[7]=sysAdmin.getCreatedDate();
+            
+            sysAdminsModel.addRow(row);
+        }
+        countTotaljLabel.setText(String.valueOf(ecosystem.getSysAdminDirectory().getSysAdmins().size()));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,150 +84,265 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
+        cityjComboBox = new javax.swing.JComboBox<>();
+        headerjLabel = new javax.swing.JLabel();
+        proceedjButton = new javax.swing.JButton();
+        headerjLabel1 = new javax.swing.JLabel();
+        addCityjComboBox = new javax.swing.JComboBox<>();
+        addCityjButton = new javax.swing.JButton();
+        manageSysAdminsjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree = new javax.swing.JTree();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        lblSelectedNode = new javax.swing.JLabel();
-        btnmanageallcustomers = new javax.swing.JButton();
-        btnmanagerestaurants = new javax.swing.JButton();
-        btnmanagerdeliveryman = new javax.swing.JButton();
+        sysAdminsjTable = new javax.swing.JTable();
+        countLablejLabel = new javax.swing.JLabel();
+        countTotaljLabel = new javax.swing.JLabel();
+        createjButton = new javax.swing.JButton();
+        deletejButton = new javax.swing.JButton();
+        updatejButton = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
-        jTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTreeValueChanged(evt);
+        headerjLabel.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        headerjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerjLabel.setText("Please Select a City to Manage");
+
+        proceedjButton.setText("Proceed >");
+        proceedjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedjButtonActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTree);
+
+        headerjLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        headerjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerjLabel1.setText("Select a City to Add");
+
+        addCityjButton.setText("Add City");
+        addCityjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCityjButtonActionPerformed(evt);
+            }
+        });
+
+        manageSysAdminsjLabel.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        manageSysAdminsjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        manageSysAdminsjLabel.setText("Manage System Admins");
+
+        sysAdminsjTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Serial No", "Name", "UserName", "Password", "Email", "Phone No", "Created By", "Created On"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(sysAdminsjTable);
+        if (sysAdminsjTable.getColumnModel().getColumnCount() > 0) {
+            sysAdminsjTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+        }
+
+        countLablejLabel.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
+        countLablejLabel.setText("Count :");
+
+        countTotaljLabel.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
+        countTotaljLabel.setText("0");
+
+        createjButton.setText("Create >");
+        createjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createjButtonActionPerformed(evt);
+            }
+        });
+
+        deletejButton.setText("Delete");
+        deletejButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletejButtonActionPerformed(evt);
+            }
+        });
+
+        updatejButton.setText("Update");
+        updatejButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatejButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(headerjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(177, 177, 177)
+                                .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(242, 242, 242)
+                                .addComponent(proceedjButton)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(209, 209, 209)
+                                .addComponent(addCityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(246, 246, 246)
+                                .addComponent(addCityjButton))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(manageSysAdminsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(countLablejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(countTotaljLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(updatejButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(deletejButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(createjButton)))))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 118, Short.MAX_VALUE))
-        );
-
-        jSplitPane.setLeftComponent(jPanel1);
-
-        jLabel1.setText("Selected Node:");
-
-        lblSelectedNode.setText("<View_selected_node>");
-
-        btnmanageallcustomers.setText("Manage All Customers");
-        btnmanageallcustomers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmanageallcustomersActionPerformed(evt);
-            }
-        });
-
-        btnmanagerestaurants.setText("Manage Restaurants");
-        btnmanagerestaurants.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmanagerestaurantsActionPerformed(evt);
-            }
-        });
-
-        btnmanagerdeliveryman.setText("Manage Deliveryman");
-        btnmanagerdeliveryman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmanagerdeliverymanActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSelectedNode))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnmanagerdeliveryman)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnmanagerestaurants, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnmanageallcustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblSelectedNode))
-                .addGap(54, 54, 54)
-                .addComponent(btnmanageallcustomers)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(headerjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addCityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(proceedjButton)
+                    .addComponent(addCityjButton))
+                .addGap(57, 57, 57)
+                .addComponent(manageSysAdminsjLabel)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnmanagerestaurants)
-                .addGap(18, 18, 18)
-                .addComponent(btnmanagerdeliveryman)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(countLablejLabel)
+                    .addComponent(countTotaljLabel)
+                    .addComponent(createjButton)
+                    .addComponent(deletejButton)
+                    .addComponent(updatejButton))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jSplitPane.setRightComponent(jPanel2);
-
-        add(jSplitPane, java.awt.BorderLayout.CENTER);
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnmanageallcustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageallcustomersActionPerformed
-//        system.getCustomerDirectory()
-        ManageCustomersJPanel panel = new ManageCustomersJPanel(userProcessContainer,system);
-        userProcessContainer.add("ManageCustomersJPanel", panel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnmanageallcustomersActionPerformed
-
-    private void btnmanagerestaurantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanagerestaurantsActionPerformed
-        ManageRestaurantsJPanel panel = new ManageRestaurantsJPanel(userProcessContainer,system);
-        userProcessContainer.add("ManageRestaurantsJPanel", panel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer); 
-    }//GEN-LAST:event_btnmanagerestaurantsActionPerformed
-
-    private void btnmanagerdeliverymanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanagerdeliverymanActionPerformed
-        ManageDeliveryMenJPanel panel = new ManageDeliveryMenJPanel(userProcessContainer,system);
-        userProcessContainer.add("ManageDeliveryMenJPanel", panel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);  
-    }//GEN-LAST:event_btnmanagerdeliverymanActionPerformed
-
-    private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
+    private void proceedjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedjButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = cityjComboBox.getSelectedIndex();
         
-        DefaultMutableTreeNode selectedNode= (DefaultMutableTreeNode)jTree.getLastSelectedPathComponent();
-        if(selectedNode!=null){
-            lblSelectedNode.setText(selectedNode.toString());
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("adminMasterCityPanel",new SystemAdminManageCity(userProcessContainer,ecosystem,
+                ecosystem.getCityNetworks().get(selectedIndex), userLogged));
+        cardLayout.next(userProcessContainer);
+    }//GEN-LAST:event_proceedjButtonActionPerformed
+
+    private void addCityjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCityjButtonActionPerformed
+        // TODO add your handling code here:
+        
+        for(CityNetwork cityNetwork:ecosystem.getCityNetworks()) {
+            if(cityNetwork.getCityName().name().equalsIgnoreCase((String) addCityjComboBox.getSelectedItem())){
+                JOptionPane.showMessageDialog(this, "City Already Exists. Please select another one");
+                return;
+            }
         }
-    }//GEN-LAST:event_jTreeValueChanged
+        ecosystem.getCityNetworks().add(new CityNetwork(CityName.valueOf((String) addCityjComboBox.getSelectedItem()), new Date(), 
+                new Date(), userLogged.getName(), userLogged.getName()));
+        populateCities();
+    }//GEN-LAST:event_addCityjButtonActionPerformed
+
+    private void createjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createjButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("CreateSysAdminPanel", new CreateNewSysAdminJPanel(userProcessContainer,ecosystem,userLogged));
+        cardLayout.next(userProcessContainer);
+    }//GEN-LAST:event_createjButtonActionPerformed
+
+    private void updatejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatejButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedSysAdmin = sysAdminsjTable.getSelectedRow();
+        if(selectedSysAdmin < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to Update");
+            return;
+        }
+        
+        DefaultTableModel sysAdminsModel = (DefaultTableModel) sysAdminsjTable.getModel();
+        SysAdmin sysAdmin = (SysAdmin) sysAdminsModel.getValueAt(selectedSysAdmin, 1);
+        CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("UpdateSysAdminPanel", new UpdateSysAdminJPanel(userProcessContainer,ecosystem,sysAdmin,userLogged));
+        cardLayout.next(userProcessContainer);
+    }//GEN-LAST:event_updatejButtonActionPerformed
+
+    private void deletejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletejButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedSysAdmin = sysAdminsjTable.getSelectedRow();
+        if(selectedSysAdmin < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to Update");
+            return;
+        }
+        
+        DefaultTableModel sysAdminsModel = (DefaultTableModel) sysAdminsjTable.getModel();
+        SysAdmin sysAdmin = (SysAdmin) sysAdminsModel.getValueAt(selectedSysAdmin, 1);
+        if(ecosystem.getSysAdminDirectory().getSysAdmins().size()==1 || sysAdmin.getUserName().equals(userLogged.getUserName())){
+            JOptionPane.showMessageDialog(this, "Cannot delete Yourself");
+            return;
+        }
+        ecosystem.getSysAdminDirectory().getSysAdmins().remove(sysAdmin);
+        populateSysAdmins();
+    }//GEN-LAST:event_deletejButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnmanageallcustomers;
-    private javax.swing.JButton btnmanagerdeliveryman;
-    private javax.swing.JButton btnmanagerestaurants;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addCityjButton;
+    private javax.swing.JComboBox<String> addCityjComboBox;
+    private javax.swing.JComboBox<String> cityjComboBox;
+    private javax.swing.JLabel countLablejLabel;
+    private javax.swing.JLabel countTotaljLabel;
+    private javax.swing.JButton createjButton;
+    private javax.swing.JButton deletejButton;
+    private javax.swing.JLabel headerjLabel;
+    private javax.swing.JLabel headerjLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTree jTree;
-    private javax.swing.JLabel lblSelectedNode;
+    private javax.swing.JLabel manageSysAdminsjLabel;
+    private javax.swing.JButton proceedjButton;
+    private javax.swing.JTable sysAdminsjTable;
+    private javax.swing.JButton updatejButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,68 +1,72 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Business.UserAccount;
 
-import Business.Customer.Customer;
-import Business.DeliveryMan.DeliveryMan;
-import Business.Employee.Employee;
-import Business.Role.RestaurantManagerRole;
+import Business.ModificationInfo;
 import Business.Role.Role;
-import Business.WorkQueue.WorkQueue;
+import java.util.Date;
 
 /**
  *
- * @author raunak
+ * @author manojreddy
  */
-public class UserAccount {
+public class UserAccount extends ModificationInfo{
     
-    private String username;
-    private String password;
-    private Employee employee;
-    private Customer customer;
-    private DeliveryMan deliverman;
-    private Role role;
-    private WorkQueue workQueue;
+    private String name;
 
-    public UserAccount(String username, String password, Role role) {
-        this.username = username;
+    private String phoneNo;
+    
+    private String email;
+    
+    private String userName;
+    
+    private String password;
+    
+    private Role role;
+
+    public UserAccount(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
+        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.userName = userName;
         this.password = password;
         this.role = role;
-        workQueue = new WorkQueue();
-
-        //this.customer = new Customer(username, "", username, password);
-    }
-
-    public UserAccount() {
-        workQueue = new WorkQueue();
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public DeliveryMan getDeliverman() {
-        return deliverman;
-    }
-
-    public void setDeliverman(DeliveryMan deliverman) {
-        this.deliverman = deliverman;
-        deliverman.setUseraccount(this);
     }
     
-    
-    
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -77,29 +81,8 @@ public class UserAccount {
         return role;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public WorkQueue getWorkQueue() {
-        return workQueue;
-    }
-
-    
-    
-    @Override
-    public String toString() {
-        return username;
-    }
-    
-    
     
 }

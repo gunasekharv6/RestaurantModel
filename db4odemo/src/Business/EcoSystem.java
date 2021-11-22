@@ -5,89 +5,49 @@
  */
 package Business;
 
-
 import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryMan;
-import Business.DeliveryMan.DeliveryManDirectory;
-import Business.Restaurant.RestaurantDirectory;
-import Business.Role.Role;
-import Business.Role.SystemAdminRole;
-import Business.UserAccount.MasterUserAccountDirectory;
-import Business.UserAccount.UserAccount;
+import Business.SysAdmin.SysAdminDirectory;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author MyPC1
+ * @author manojreddy
  */
-public class EcoSystem extends Organization{
+public class EcoSystem {
     
-    private String ecosystemName;
-    private static EcoSystem business;
-    private RestaurantDirectory restaurantDirectory;
+    private static EcoSystem ecoSystem;
+    
+    private List<CityNetwork> cityNetworks = new ArrayList<>();
+    
+    private SysAdminDirectory sysAdminDirectory;
+    
     private CustomerDirectory customerDirectory;
-    //private DeliveryManDirectory deliveryManDirectory;
-    private MasterUserAccountDirectory masterUserAccountDirectory;
-
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, MasterUserAccountDirectory masterUserAccountDirectory) {
-
-        this.restaurantDirectory = restaurantDirectory;
-        this.customerDirectory = customerDirectory;
-        //this.deliveryManDirectory = deliveryManDirectory;
-        this.masterUserAccountDirectory = masterUserAccountDirectory;
-    }
     
-//    public void addDeliveryMan(DeliveryMan dm){
-//        this.deliveryManDirectory.getDeliveryManList().add(dm);
-//    }
-    
-    public static EcoSystem getInstance(){
-        if(business==null){
-            business=new EcoSystem();
+    public static EcoSystem getInstance() {
+        if(ecoSystem==null){
+            ecoSystem = new EcoSystem();
         }
-        return business;
+        return ecoSystem;
     }
 
-    public String getEcosystemName() {
-        return ecosystemName;
+    private EcoSystem() {
     }
 
-    public void setEcosystemName(String ecosystemName) {
-        this.ecosystemName = ecosystemName;
-    }
-    
-    
-    
-    
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roleList=new ArrayList<Role>();
-        roleList.add(new SystemAdminRole());
-        return roleList;
-    }
-    private EcoSystem(){
-        super(null);
-       // networkList=new ArrayList<Network>();
+    public List<CityNetwork> getCityNetworks() {
+        return cityNetworks;
     }
 
-//    
-//    public boolean checkIfUserIsUnique(String userName){
-//       return this.getUserAccountDirectory().checkIfUsernameExists(userName);
-//    }
-
-    public static EcoSystem getBusiness() {
-        return business;
+    public void setCityNetworks(List<CityNetwork> cityNetworks) {
+        this.cityNetworks = cityNetworks;
     }
 
-    public static void setBusiness(EcoSystem business) {
-        EcoSystem.business = business;
+    public SysAdminDirectory getSysAdminDirectory() {
+        return sysAdminDirectory;
     }
 
-    public RestaurantDirectory getRestaurantDirectory() {
-        return restaurantDirectory;
-    }
-
-    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
-        this.restaurantDirectory = restaurantDirectory;
+    public void setSysAdminDirectory(SysAdminDirectory sysAdminDirectory) {
+        this.sysAdminDirectory = sysAdminDirectory;
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -97,24 +57,5 @@ public class EcoSystem extends Organization{
     public void setCustomerDirectory(CustomerDirectory customerDirectory) {
         this.customerDirectory = customerDirectory;
     }
-
-//    public DeliveryManDirectory getDeliveryManDirectory() {
-//        return deliveryManDirectory;
-//    }
-//
-//    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
-//        this.deliveryManDirectory = deliveryManDirectory;
-//    }
-
-    public MasterUserAccountDirectory getMasterUserAccountDirectory() {
-        return masterUserAccountDirectory;
-    }
-
-    public void setMasterUserAccountDirectory(MasterUserAccountDirectory masterUserAccountDirectory) {
-        this.masterUserAccountDirectory = masterUserAccountDirectory;
-    }
-    
-    
-    
     
 }

@@ -4,47 +4,26 @@
  */
 package Business.Role;
 
-import Business.EcoSystem;
-
-import Business.Organization;
-import Business.UserAccount.UserAccount;
-import javax.swing.JPanel;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
  * @author raunak
  */
-public abstract class Role {
+public enum Role {
     
-    public enum RoleType{
-        RestaurantAdmin("RestaurantAdmin"),
-        Customer("Customer"),
-        DeliveryMan("Delivery"),
-        SysAdmin("Sysadmin");
+    RestaurantAdmin,Customer,DeliveryMan,SysAdmin;
+    
+    public static List<String> getRolesList(){
+       
+        return Stream.of(Role.values()).map(Role::name).collect(Collectors.toList());
+    }
+    
+    public static String[] getRolesArray() {
         
-        private String value;
-        private RoleType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
+        return Arrays.stream(Role.values()).map(Role::name).toArray(String[]::new);
     }
-    
-    public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account,  
-            EcoSystem business);
-
-    @Override
-    public String toString() {
-        return this.getClass().getName();
-    }
-    
-    
 }

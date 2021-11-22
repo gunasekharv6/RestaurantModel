@@ -5,113 +5,75 @@
  */
 package Business.Restaurant;
 
-import OrderDirectory.Order;
-import Business.Customer.CustomerDirectory;
-import Business.DeliveryMan.DeliveryManDirectory;
-import Business.Employee.Employee;
-import Business.Organization;
-import Business.Role.RestaurantManagerRole;
-import Business.Role.Role;
+import Business.Employee.RestaurantEmployeeDirectory;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.List;
 
 /**
  *
- * @author harold
+ * @author manojreddy
  */
-public class Restaurant extends Organization{
-//    private String restaurantName;
+public class Restaurant {
+    
+    private String restaurantName;
+    
+    private String phoneNo;
+    
     private String address;
-    private Employee manager;
-    private String cuisineType;
-    private ArrayList<Item> itemsList;
-    private ArrayList<Order> orderList;
     
-    private ArrayList<Role> supportedRoles;
+    private String email;
+    
+    private List<MenuItem> menuItems = new ArrayList<>();
+    
+    private RestaurantEmployeeDirectory restaurantEmployeeDirectory = new RestaurantEmployeeDirectory();
+    
+    private List<Order> orders = new ArrayList<>();
 
-    
-    public Restaurant(String name) {
-        super(name);
-        supportedRoles = new ArrayList();
-        manager = new Employee();
-        this.supportedRoles.add(new RestaurantManagerRole());
-        this.itemsList = new ArrayList<Item>();
-        this.orderList = new ArrayList<Order>();
-    }
-    
-    public Restaurant(String name, String managerName) {
-        super(name);
-        super.getEmployeeDirectory().getEmployeeList().add(0, new Employee(managerName));
-        
-        supportedRoles = new ArrayList();
-        this.supportedRoles.add(new RestaurantManagerRole());
-        this.itemsList = new ArrayList<Item>();
-        this.orderList = new ArrayList<Order>();
-    }
-    
-    public void addOrder(Order order){
-        this.orderList.add(order);
-    }
-    
-
-    public ArrayList<Order> getOrderList() {
-//        if (this.orderList.isEmpty()){
-//            JOptionPane.showMessageDialog(null, "No Orders present");
-//            return null;
-//        }
-        return orderList;
+    public Restaurant(String restaurantName, String phoneNo, String address, String email) {
+        this.restaurantName = restaurantName;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.email = email;
     }
 
-    public void setOrderList(ArrayList<Order> orderList) {
-        this.orderList = orderList;
-    }
-    
-    
-    public Item addItem(String itemname, int price){
-        Item item = new Item();
-        item.setItemName(itemname);
-        item.setPrice(price);
-        this.itemsList.add(item);
-        return item;
-    }
-    
-    public boolean hasManager(){
-        if (super.getEmployeeDirectory().getEmployeeList().isEmpty()){
-            return false;
-        }return true;
-    }
-    
-    
-    public Employee getManager(){
-        if (hasManager()){
-            return super.getEmployeeDirectory().getEmployeeList().get(0);
-        }return null;
-    }
-    
-    public void setManager(Employee manager){
-        super.getEmployeeDirectory().getEmployeeList().set(0, manager);
-    }
-    
-    
-    
-    
-    public ArrayList<Item> getItemsList() {
-        return itemsList;
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
     }
 
-    public void setItemsList(ArrayList<Item> itemsList) {
-        this.itemsList = itemsList;
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
-    
-    
-    
+    public RestaurantEmployeeDirectory getRestaurantEmployeeDirectory() {
+        return restaurantEmployeeDirectory;
+    }
+
+    public void setRestaurantEmployeeDirectory(RestaurantEmployeeDirectory restaurantEmployeeDirectory) {
+        this.restaurantEmployeeDirectory = restaurantEmployeeDirectory;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public String getRestaurantName() {
-        return super.getName();
+        return restaurantName;
     }
 
     public void setRestaurantName(String restaurantName) {
-        super.setName(restaurantName);
+        this.restaurantName = restaurantName;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     public String getAddress() {
@@ -122,48 +84,17 @@ public class Restaurant extends Organization{
         this.address = address;
     }
 
-    public ArrayList<Role> getSupportedRoles() {
-        return supportedRoles;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSupportedRoles(ArrayList<Role> supportedRoles) {
-        this.supportedRoles = supportedRoles;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
-
-    @Override
-    public CustomerDirectory getCustDirectory() {
-        return super.getCustDirectory();
-    }
-
-    @Override
-    public void setCustDirectory(CustomerDirectory custDirectory) {
-        super.setCustDirectory(custDirectory);
-    }
-
-    @Override
-    public DeliveryManDirectory getDeliveryManDirectory() {
-        return super.getDeliveryManDirectory();
-    }
-
-    @Override
-    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
-        super.setDeliveryManDirectory(deliveryManDirectory);
-    }
-
-    public String getCuisineType() {
-        return cuisineType;
-    }
-
-    public void setCuisineType(String cuisineType) {
-        this.cuisineType = cuisineType;
-    }    
 
     @Override
     public String toString() {
-        return getRestaurantName();
+        return getRestaurantName(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+   
 }
