@@ -347,11 +347,14 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         DefaultTableModel currentOrdersModel = (DefaultTableModel) currentOrdersjTable.getModel();
         Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 4);
         
-        for (DeliveryMan dm : areaNetwork.getDeliveryManDirectory().getDeliveryMan()){
-            if (order.getAssignedTo().getUseraccount().getName().equalsIgnoreCase(dm.getUseraccount().getName())){
-                dm.getOrders().remove(order);
+        if(order.getAssignedTo()!=null){
+            for (DeliveryMan dm : areaNetwork.getDeliveryManDirectory().getDeliveryMan()){
+               if (order.getAssignedTo().getUseraccount().getName().equalsIgnoreCase(dm.getUseraccount().getName())){
+                    dm.getOrders().remove(order);
+                }
             }
         }
+        
         
         
         order.setAcceptedBy((Employee) userAccount.getParentClass());
