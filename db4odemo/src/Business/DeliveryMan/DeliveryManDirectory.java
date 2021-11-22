@@ -10,10 +10,10 @@ import java.util.List;
 
 /**
  *
- * @author gunav
+ * @author harold
  */
 public class DeliveryManDirectory {
-    
+        
     private List<DeliveryMan> deliveryMan = new ArrayList<>();
   
     public DeliveryManDirectory() {
@@ -26,5 +26,4 @@ public class DeliveryManDirectory {
     public void setDeliveryMan(List<DeliveryMan> deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
-    
 }

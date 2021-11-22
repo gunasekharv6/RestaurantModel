@@ -3,7 +3,7 @@
 package userinterface.RestaurantAdminRole;
 
 
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.EcoSystem;
 import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
@@ -20,17 +20,17 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem ecoSystem;
     UserAccount userAccount;
     Restaurant restaurant;
-    CityNetwork cityNetwork;
+    AreaNetwork areaNetwork;
     
     /** Creates new form AdminWorkAreaJPanel */
     public RestaurantAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, UserAccount userLogged,
-        Restaurant restaurant, CityNetwork cityNetwork) {
+        Restaurant restaurant, AreaNetwork areaNetwork) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.userAccount = userLogged;
         this.restaurant = restaurant;
-        this.cityNetwork = cityNetwork;
+        this.areaNetwork = areaNetwork;
         valueLabel.setText(restaurant.getRestaurantName());
     }
     
@@ -62,7 +62,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageRestaurantInfoJButtonActionPerformed(evt);
             }
         });
-        add(manageRestaurantInfoJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 180, -1));
+        add(manageRestaurantInfoJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 180, -1));
 
         manageMenuItemJButton.setText("Manage menu");
         manageMenuItemJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +70,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageMenuItemJButtonActionPerformed(evt);
             }
         });
-        add(manageMenuItemJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 180, -1));
+        add(manageMenuItemJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 180, -1));
 
         manageOrdersJButton.setText("Manage Orders");
         manageOrdersJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageOrdersJButtonActionPerformed(evt);
             }
         });
-        add(manageOrdersJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 180, -1));
+        add(manageOrdersJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 180, -1));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Restaurant :");
@@ -100,7 +100,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void manageMenuItemJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuItemJButtonActionPerformed
 
         CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("ManageMenuItems",new ManageMenuItemJPanel(userProcessContainer, userAccount, restaurant));
+        userProcessContainer.add("ManageMenuItems",new ManageItemJPanel(userProcessContainer, userAccount, restaurant));
         cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_manageMenuItemJButtonActionPerformed
 
@@ -108,7 +108,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         
         CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("ManageOrdersPanel", new ManageOrdersRestaurantJPanel(userProcessContainer, userAccount, restaurant,
-            ecoSystem, cityNetwork));
+            ecoSystem, areaNetwork));
         cardLayout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrdersJButtonActionPerformed
     

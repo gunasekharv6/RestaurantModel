@@ -10,6 +10,6 @@ package Business.Restaurant;
  * @author gunav
  */
 public enum  OrderStatus {
-    OrderPlaced,OrderAccepted,DeliveryGuyAssigned,Delivered,Decline;
+    OrderPlaced,OrderAccepted,UpforPickUp,Delivered,Decline;
     
 }

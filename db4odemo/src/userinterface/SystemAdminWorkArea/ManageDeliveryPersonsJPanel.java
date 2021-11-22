@@ -5,7 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.Customer.Customer;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
@@ -28,13 +28,13 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userLogged;
     private EcoSystem ecoSystem;
-    private CityNetwork cityNetwork;
+    private AreaNetwork areaNetwork;
     
-    public ManageDeliveryPersonsJPanel(JPanel jpanel, UserAccount userLogged, EcoSystem ecoSystem, CityNetwork cityNetwork) {
+    public ManageDeliveryPersonsJPanel(JPanel jpanel, UserAccount userLogged, EcoSystem ecoSystem, AreaNetwork areaNetwork) {
         this.ecoSystem=ecoSystem;
         this.userLogged=userLogged;
         this.userProcessContainer=jpanel;
-        this.cityNetwork=cityNetwork;
+        this.areaNetwork=areaNetwork;
         initComponents();
         populateDeliveryPersons();
     }
@@ -44,16 +44,16 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDeliveryPersonsList.getModel();
         model.setRowCount(0);
         int count=0;
-        for(DeliveryMan deliveryMan:cityNetwork.getDeliveryManDirectory().getDeliveryMan()) {
+        for(DeliveryMan deliveryMan:areaNetwork.getDeliveryManDirectory().getDeliveryMan()) {
             
             count++;
             Object[] row = new Object[6];
             row[0]=count;
             row[1]=deliveryMan;
-            row[2]=deliveryMan.getUserName();
-            row[3]=deliveryMan.getPassword();
-            row[4]=deliveryMan.getPhoneNo();
-            row[5]=deliveryMan.getEmail();
+            row[2]=deliveryMan.getUseraccount().getUserName();
+            row[3]=deliveryMan.getUseraccount().getPassword();
+            row[4]=deliveryMan.getUseraccount().getPhoneNo();
+            row[5]=deliveryMan.getUseraccount().getEmail();
 //            row[6]=deliveryMan.getCreatedBy();
 //            row[7]=deliveryMan.getCreatedDate();
 //            row[8]=deliveryMan.getModifiedBy();
@@ -61,7 +61,7 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
-        counterjLabel.setText(String.valueOf(cityNetwork.getDeliveryManDirectory().getDeliveryMan().size()));
+        counterjLabel.setText(String.valueOf(areaNetwork.getDeliveryManDirectory().getDeliveryMan().size()));
     }
     
     /**
@@ -95,8 +95,8 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
         headerjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerjLabel.setText("Manage Delivery Executives");
 
-        deliveryPersonsjLabel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        deliveryPersonsjLabel.setText("DeliveryPersons List");
+        deliveryPersonsjLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        deliveryPersonsjLabel.setText("Delivery Executives List");
 
         tblDeliveryPersonsList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,7 +227,7 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
             return;
         } else {
             DeliveryMan selectedDeliveryPerson = (DeliveryMan) tblDeliveryPersonsList.getValueAt(selectedRow, 1);
-            cityNetwork.getDeliveryManDirectory().getDeliveryMan().remove(selectedDeliveryPerson);
+            areaNetwork.getDeliveryManDirectory().getDeliveryMan().remove(selectedDeliveryPerson);
             JOptionPane.showMessageDialog(null, "DeliveryMan Account deleted successfully");
 
             populateDeliveryPersons();
@@ -236,7 +236,7 @@ public class ManageDeliveryPersonsJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CreateNewDeliveryPersonJPanel panel = new CreateNewDeliveryPersonJPanel(userProcessContainer, ecoSystem, userLogged,cityNetwork);
+        CreateNewDeliveryPersonJPanel panel = new CreateNewDeliveryPersonJPanel(userProcessContainer, ecoSystem, userLogged, areaNetwork);
         //          userProcessContainer.remove(this);
         userProcessContainer.add("CreateNewDeliveryPersonJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

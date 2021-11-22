@@ -41,11 +41,11 @@ public class UpdateDeliveryPersonJPanel extends javax.swing.JPanel {
     
     private void initializeData(){
         
-        namejTextField.setText(deliveryMan.getName());
-        userNamejTextField.setText(deliveryMan.getUserName());
-        passwordjTextField.setText(deliveryMan.getPassword());
-        emailjTextField.setText(deliveryMan.getEmail());
-        phoneNojTextField.setText(deliveryMan.getPhoneNo());
+        namejTextField.setText(deliveryMan.getUseraccount().getName());
+        userNamejTextField.setText(deliveryMan.getUseraccount().getUserName());
+        passwordjTextField.setText(deliveryMan.getUseraccount().getPassword());
+        emailjTextField.setText(deliveryMan.getUseraccount().getEmail());
+        phoneNojTextField.setText(deliveryMan.getUseraccount().getPhoneNo());
     }
 
     /**
@@ -202,25 +202,23 @@ public class UpdateDeliveryPersonJPanel extends javax.swing.JPanel {
     private void updatejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatejButtonActionPerformed
         // TODO add your handling code here:
         if(isDataEnteredValid()) {
-            if(!deliveryMan.getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
+            if(!deliveryMan.getUseraccount().getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
                 return;
             }            
-            if(!deliveryMan.getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
+            if(!deliveryMan.getUseraccount().getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
                 return;
             }
-            if(!deliveryMan.getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
+            if(!deliveryMan.getUseraccount().getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
                 return;
             }
-            deliveryMan.setName(namejTextField.getText());
-            deliveryMan.setUserName(userNamejTextField.getText());
-            deliveryMan.setPassword(passwordjTextField.getText());
-            deliveryMan.setEmail(emailjTextField.getText());
-            deliveryMan.setPhoneNo(phoneNojTextField.getText());
-            deliveryMan.setModifiedBy(userAccount.getName());
-            deliveryMan.setLastUpdatedDate(new Date());
+            deliveryMan.getUseraccount().setName(namejTextField.getText());
+            deliveryMan.getUseraccount().setUserName(userNamejTextField.getText());
+            deliveryMan.getUseraccount().setPassword(passwordjTextField.getText());
+            deliveryMan.getUseraccount().setEmail(emailjTextField.getText());
+            deliveryMan.getUseraccount().setPhoneNo(phoneNojTextField.getText());
 
             JOptionPane.showMessageDialog(this, "Successfully Updated the Delivery Person Info");
         }else {

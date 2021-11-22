@@ -188,15 +188,15 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
         if(isDataEnteredValid()) {
             
             if(Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "UserName already Exists.\nPlease try with a different UserName");
                 return;
             }
             if(Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "Email already Exists.\nPlease try with a different Email");
                 return;
             }
             if(Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "PhoneNo already Exists.\nPlease try with a different PhoneNo");
                 return;
             }
             String name = namejTextField.getText();
@@ -205,14 +205,13 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
             String email = emailjTextField.getText();
             String phoneNo = phoneNojTextField.getText();
 
-            Customer customer = new Customer(name, phoneNo, email, userName, password, Role.Customer,
-                new Date(), new Date(), userAccount.getName(), userAccount.getName());
+            Customer customer = new Customer(name, phoneNo, email, userName, password);
             ecoSystem.getCustomerDirectory().getCustomers().add(customer);
 
             JOptionPane.showMessageDialog(this, "Successfully saved new Customer");
             resetUi();
         }else{
-            JOptionPane.showMessageDialog(this, "Error saving new Customer. Please check DataTypes");
+            JOptionPane.showMessageDialog(this, "!Error! saving new Customer.\nPlease check all the entered values\nFill all the fields.");
         }
     }//GEN-LAST:event_savejButtonActionPerformed
 

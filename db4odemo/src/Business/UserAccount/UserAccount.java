@@ -1,19 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package Business.UserAccount;
 
-import Business.ModificationInfo;
+import Business.Customer.Customer;
+import Business.DeliveryMan.DeliveryMan;
+import Business.Employee.Employee;
 import Business.Role.Role;
-import java.util.Date;
+import Business.SysAdmin.SysAdmin;
 
 /**
  *
- * @author gunav
+ * @author raunak
  */
-public class UserAccount extends ModificationInfo{
+public class UserAccount {
     
     private String name;
 
@@ -26,9 +27,14 @@ public class UserAccount extends ModificationInfo{
     private String password;
     
     private Role role;
+    
+    private Object parentClass;
+//    private Customer customer;
+//    private DeliveryMan deliveryman;
+//    private Employee employee;
+//    private SysAdmin systemadmin;
 
-    public UserAccount(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public UserAccount(String name, String phoneNo, String email, String userName, String password, Role role) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.email = email;
@@ -36,7 +42,15 @@ public class UserAccount extends ModificationInfo{
         this.password = password;
         this.role = role;
     }
-    
+
+    public Object getParentClass() {
+        return parentClass;
+    }
+
+    public void setParentClass(Object parentClass) {
+        this.parentClass = parentClass;
+    }
+
     public String getName() {
         return name;
     }
@@ -84,5 +98,7 @@ public class UserAccount extends ModificationInfo{
     public void setRole(Role role) {
         this.role = role;
     }
+
+    
     
 }

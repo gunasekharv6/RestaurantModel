@@ -9,33 +9,49 @@ import Business.Restaurant.Order;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
- * @author gunav
+ * @author harold
  */
-public class Customer extends UserAccount{
+public class Customer {
     
-    private List<Order> orders = new ArrayList<>();
+    private final List<Order> orders = new ArrayList<>();
+    
+    private UserAccount useraccount;
+    
+    private String address;
+    
 
-    public Customer(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(name, phoneNo, email, userName, password, role, createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public Customer(String name, String phoneNo, String email, String userName, String password) {
+        useraccount = new UserAccount(name, phoneNo, email, userName, password, Role.Customer);
+        useraccount.setParentClass(this);
     }
-    
+
+    public UserAccount getUseraccount() {
+        return useraccount;
+    }
+
+    public void setUseraccount(UserAccount useraccount) {
+        this.useraccount = useraccount;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public List<Order> getOrders() {
         return orders;
     }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    @Override
-    public String toString() {
-        return getName(); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+    
+    
     
     
 }

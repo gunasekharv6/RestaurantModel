@@ -41,11 +41,11 @@ public class UpdateSysAdminJPanel extends javax.swing.JPanel {
 
     private void initializeData() {
         
-        namejTextField.setText(sysAdmin.getName());
-        userNamejTextField.setText(sysAdmin.getUserName());
-        passwordjTextField.setText(sysAdmin.getPassword());
-        phoneNojTextField.setText(sysAdmin.getPhoneNo());
-        emailjTextField.setText(sysAdmin.getEmail());
+        namejTextField.setText(sysAdmin.getUserAccount().getName());
+        userNamejTextField.setText(sysAdmin.getUserAccount().getUserName());
+        passwordjTextField.setText(sysAdmin.getUserAccount().getPassword());
+        phoneNojTextField.setText(sysAdmin.getUserAccount().getPhoneNo());
+        emailjTextField.setText(sysAdmin.getUserAccount().getEmail());
     }    
     
     /**
@@ -185,25 +185,23 @@ public class UpdateSysAdminJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(isDataEnteredValid()) {
 
-            if(!sysAdmin.getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
+            if(!sysAdmin.getUserAccount().getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
                 return;
             }
-            if(!sysAdmin.getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
+            if(!sysAdmin.getUserAccount().getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
                 return;
             }
-            if(!sysAdmin.getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
+            if(!sysAdmin.getUserAccount().getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
                 return;
             }
-            sysAdmin.setName(namejTextField.getText());
-            sysAdmin.setUserName(userNamejTextField.getText());
-            sysAdmin.setPassword(passwordjTextField.getText());
-            sysAdmin.setEmail(emailjTextField.getText());
-            sysAdmin.setPhoneNo(phoneNojTextField.getText());
-            sysAdmin.setLastUpdatedDate(new Date());
-            sysAdmin.setModifiedBy(userAccount.getName());
+            sysAdmin.getUserAccount().setName(namejTextField.getText());
+            sysAdmin.getUserAccount().setUserName(userNamejTextField.getText());
+            sysAdmin.getUserAccount().setPassword(passwordjTextField.getText());
+            sysAdmin.getUserAccount().setEmail(emailjTextField.getText());
+            sysAdmin.getUserAccount().setPhoneNo(phoneNojTextField.getText());
 
             JOptionPane.showMessageDialog(this, "Successfully Updated the SysAdmin");
         }else {

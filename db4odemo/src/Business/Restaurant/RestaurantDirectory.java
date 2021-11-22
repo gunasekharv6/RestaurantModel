@@ -31,7 +31,7 @@ public class RestaurantDirectory {
         this.restaurants = restaurants;
     }
     
-    public void addRestarunt(){
-        
+    public void addRestarunt(Restaurant e){
+        this.restaurants.add(e);
     }
 }

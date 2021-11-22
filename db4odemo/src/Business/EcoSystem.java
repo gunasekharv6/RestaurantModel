@@ -5,49 +5,52 @@
  */
 package Business;
 
+
+import Area.AreaNetwork;
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Restaurant.RestaurantDirectory;
+import Business.Role.Role;
 import Business.SysAdmin.SysAdminDirectory;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author gunav
+ * @author MyPC1
  */
-public class EcoSystem {
+public class EcoSystem{
     
-    private static EcoSystem ecoSystem;
-    
-    private List<CityNetwork> cityNetworks = new ArrayList<>();
-    
-    private SysAdminDirectory sysAdminDirectory;
-    
+    private static EcoSystem business;
+    private List<AreaNetwork> areaNetworks = new ArrayList<>();
     private CustomerDirectory customerDirectory;
+    private SysAdminDirectory sysAdminDirectory;
+
+    public EcoSystem() {
+
+    }
     
-    public static EcoSystem getInstance() {
-        if(ecoSystem==null){
-            ecoSystem = new EcoSystem();
+    public static EcoSystem getInstance(){
+        if(business==null){
+            business=new EcoSystem();
         }
-        return ecoSystem;
+        return business;
     }
 
-    private EcoSystem() {
+    public static EcoSystem getBusiness() {
+        return business;
     }
 
-    public List<CityNetwork> getCityNetworks() {
-        return cityNetworks;
+    public static void setBusiness(EcoSystem business) {
+        EcoSystem.business = business;
     }
 
-    public void setCityNetworks(List<CityNetwork> cityNetworks) {
-        this.cityNetworks = cityNetworks;
+    public List<AreaNetwork> getAreaNetworks() {
+        return areaNetworks;
     }
 
-    public SysAdminDirectory getSysAdminDirectory() {
-        return sysAdminDirectory;
-    }
-
-    public void setSysAdminDirectory(SysAdminDirectory sysAdminDirectory) {
-        this.sysAdminDirectory = sysAdminDirectory;
+    public void setAreaNetworks(List<AreaNetwork> areaNetworks) {
+        this.areaNetworks = areaNetworks;
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -57,5 +60,15 @@ public class EcoSystem {
     public void setCustomerDirectory(CustomerDirectory customerDirectory) {
         this.customerDirectory = customerDirectory;
     }
+
+    public SysAdminDirectory getSysAdminDirectory() {
+        return sysAdminDirectory;
+    }
+
+    public void setSysAdminDirectory(SysAdminDirectory sysAdminDirectory) {
+        this.sysAdminDirectory = sysAdminDirectory;
+    }
     
+    
+
 }

@@ -206,8 +206,7 @@ public class CreateNewSysAdminJPanel extends javax.swing.JPanel {
             String email = emailjTextField.getText();
             String phoneNo = phoneNojTextField.getText();
 
-            SysAdmin sysAdmin = new SysAdmin(name, phoneNo, email, userName, password, Role.Customer,
-                new Date(), new Date(), userAccount.getName(), userAccount.getName());
+            SysAdmin sysAdmin = new SysAdmin(name, phoneNo, email, userName, password);
             ecoSystem.getSysAdminDirectory().getSysAdmins().add(sysAdmin);
 
             JOptionPane.showMessageDialog(this, "Successfully saved new SysAdmin");

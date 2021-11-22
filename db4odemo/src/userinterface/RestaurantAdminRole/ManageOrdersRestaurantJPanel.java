@@ -5,11 +5,11 @@
  */
 package userinterface.RestaurantAdminRole;
 
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
-import Business.Employee.RestaurantEmployee;
-import Business.Restaurant.MenuItem;
+import Business.Employee.Employee;
+import Business.Restaurant.Item;
 import Business.Restaurant.Order;
 import Business.Restaurant.OrderStatus;
 import Business.Restaurant.Restaurant;
@@ -34,24 +34,29 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Restaurant restaurant;
     private EcoSystem ecoSystem;
-    private CityNetwork cityNetwork;
+    private AreaNetwork areaNetwork;
         
     public ManageOrdersRestaurantJPanel(JPanel userProcessContainer,UserAccount userAccount,Restaurant restaurant,
-        EcoSystem ecoSystem, CityNetwork cityNetwork) {
+        EcoSystem ecoSystem, AreaNetwork areaNetwork) {
         this.userProcessContainer = userProcessContainer;
         this.userAccount=userAccount;
-        this.cityNetwork = cityNetwork;
+        this.areaNetwork = areaNetwork;
         this.ecoSystem=ecoSystem;
         this.restaurant=restaurant;
         initComponents();
+        
+//        for(Order order:restaurant.getOrders()){
+//            order.setOrderStatus(OrderStatus.OrderPlaced);
+//        }
+//        
         populateData();
     }
     
     private void populateData() {
         
         deliveryManjComboBox.removeAllItems();
-        for(DeliveryMan deliveryMan:cityNetwork.getDeliveryManDirectory().getDeliveryMan()){
-            deliveryManjComboBox.addItem(deliveryMan.getName());
+        for(DeliveryMan deliveryMan:areaNetwork.getDeliveryManDirectory().getDeliveryMan()){
+            deliveryManjComboBox.addItem(deliveryMan.getUseraccount().getName());
         }
         
         DefaultTableModel currentOrdersModel = (DefaultTableModel) currentOrdersjTable.getModel();
@@ -67,26 +72,28 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             if(order.getOrderStatus().name().equalsIgnoreCase(OrderStatus.Delivered.name()) || 
                     order.getOrderStatus().name().equalsIgnoreCase(OrderStatus.Decline.name())){
                 successOrderCount++;
-                Object[] row = new Object[6];
-                row[0] = successOrderCount;
-                row[1] = order.getOrderedBy().getName();
-                row[2] = order.getCustomerInstructions();
-                row[3] = order;
-                row[4] = order.getOrderStatus();
-                if(order.getDeliveryMan()!=null){
-                    row[5] = order.getDeliveryMan().getName();
+                Object[] row = new Object[7];
+                row[0] = currentOrderCount;
+                row[1] = order.getOrderedBy().getUseraccount().getName();
+                row[2] = order.getItems();
+                row[3] = order.getCustomerInstructions();
+                row[4] = order;
+                row[5] = order.getOrderStatus();
+                if(order.getAssignedTo()!=null){
+                    row[6] = order.getAssignedTo().getUseraccount().getName();
                 }
                 successOrderModel.addRow(row);
             }else{
                 currentOrderCount++;
-                Object[] row = new Object[6];
+                Object[] row = new Object[7];
                 row[0] = currentOrderCount;
-                row[1] = order.getOrderedBy().getName();
-                row[2] = order.getCustomerInstructions();
-                row[3] = order;
-                row[4] = order.getOrderStatus();
-                if(order.getDeliveryMan()!=null){
-                    row[5] = order.getDeliveryMan().getName();
+                row[1] = order.getOrderedBy().getUseraccount().getName();
+                row[2] = order.getItems();
+                row[3] = order.getCustomerInstructions();
+                row[4] = order;
+                row[5] = order.getOrderStatus();
+                if(order.getAssignedTo()!=null){
+                    row[6] = order.getAssignedTo().getUseraccount().getName();
                 }
                 currentOrdersModel.addRow(row);
             }
@@ -95,11 +102,11 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         totalCountjLabel.setText(String.valueOf(successOrderCount));
         pendingCountjLabel.setText(String.valueOf(currentOrderCount));
         
-        DefaultTableModel deliveredMenuItemsModel = (DefaultTableModel) deliveredMenuItemjTable.getModel();
-        deliveredMenuItemsModel.setRowCount(0);
+//        DefaultTableModel deliveredMenuItemsModel = (DefaultTableModel) deliveredMenuItemjTable.getModel();
+//        deliveredMenuItemsModel.setRowCount(0);
         
-        DefaultTableModel currentMenuItemsModel = (DefaultTableModel) currentMenuItemjTable.getModel();
-        currentMenuItemsModel.setRowCount(0);
+//        DefaultTableModel currentMenuItemsModel = (DefaultTableModel) currentMenuItemjTable.getModel();
+//        currentMenuItemsModel.setRowCount(0);
     }
 
     /**
@@ -115,16 +122,12 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         currentOrdersHeaderjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         currentOrdersjTable = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        currentMenuItemjTable = new javax.swing.JTable();
         currentOrdersHeaderjLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ordersDeliveredjTable = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        deliveredMenuItemjTable = new javax.swing.JTable();
         deliveryManjComboBox = new javax.swing.JComboBox<>();
         deliveryPersonjLabel = new javax.swing.JLabel();
-        acceptjButton = new javax.swing.JButton();
+        assignjButton = new javax.swing.JButton();
         totalCountHeaderjLabel = new javax.swing.JLabel();
         totalCountjLabel = new javax.swing.JLabel();
         pendingCountHeaderjLabel = new javax.swing.JLabel();
@@ -144,20 +147,20 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
         currentOrdersjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "S.No", "CustomerName", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
+                "S.No", "CustomerName", "Items", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -179,57 +182,26 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             currentOrdersjTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        currentMenuItemjTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "S.No", "Item"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(currentMenuItemjTable);
-        if (currentMenuItemjTable.getColumnModel().getColumnCount() > 0) {
-            currentMenuItemjTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-        }
-
         currentOrdersHeaderjLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         currentOrdersHeaderjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        currentOrdersHeaderjLabel1.setText("Order Directory");
+        currentOrdersHeaderjLabel1.setText("Order History");
 
         ordersDeliveredjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "S.No", "CustomerName", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
+                "S.No", "CustomerName", "Item", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -251,44 +223,13 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             ordersDeliveredjTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        deliveredMenuItemjTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "S.No", "Item"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(deliveredMenuItemjTable);
-        if (deliveredMenuItemjTable.getColumnModel().getColumnCount() > 0) {
-            deliveredMenuItemjTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-        }
-
         deliveryPersonjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         deliveryPersonjLabel.setText("Choose Delivery Person :");
 
-        acceptjButton.setText("Assign Order?");
-        acceptjButton.addActionListener(new java.awt.event.ActionListener() {
+        assignjButton.setText("Assign To?");
+        assignjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acceptjButtonActionPerformed(evt);
+                assignjButtonActionPerformed(evt);
             }
         });
 
@@ -300,7 +241,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
         pendingCountHeaderjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         pendingCountHeaderjLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        pendingCountHeaderjLabel.setText("Count :");
+        pendingCountHeaderjLabel.setText("No of Order :");
 
         pendingCountjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         pendingCountjLabel.setText("0");
@@ -317,46 +258,41 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(23, 23, 23)
-                            .addComponent(backButtonjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(103, 103, 103)
-                            .addComponent(currentOrdersHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(201, 201, 201)
-                            .addComponent(currentOrdersHeaderjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(76, 76, 76)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(deliveryPersonjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(deliveryManjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(acceptjButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(declinejButton))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(pendingCountHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(pendingCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(39, 39, 39)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(totalCountHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(totalCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(totalCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(813, 813, 813))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(39, 39, 39)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(168, Short.MAX_VALUE))
+                            .addComponent(pendingCountHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(pendingCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(declinejButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backButtonjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addComponent(currentOrdersHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(125, 125, 125)
+                                .addComponent(currentOrdersHeaderjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(570, 570, 570)
+                        .addComponent(assignjButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deliveryPersonjLabel)
+                        .addGap(35, 35, 35)
+                        .addComponent(deliveryManjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,31 +301,31 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButtonjButton)
                     .addComponent(currentOrdersHeaderjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pendingCountHeaderjLabel)
-                    .addComponent(pendingCountjLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deliveryManjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deliveryPersonjLabel)
-                    .addComponent(acceptjButton)
-                    .addComponent(declinejButton))
-                .addGap(24, 24, 24)
-                .addComponent(currentOrdersHeaderjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(assignjButton)
+                    .addComponent(deliveryManjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalCountHeaderjLabel)
-                    .addComponent(totalCountjLabel))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pendingCountHeaderjLabel)
+                            .addComponent(pendingCountjLabel))
+                        .addGap(28, 28, 28)
+                        .addComponent(currentOrdersHeaderjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalCountHeaderjLabel)
+                            .addComponent(totalCountjLabel)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(declinejButton)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,7 +337,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backButtonjButtonActionPerformed
 
-    private void acceptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptjButtonActionPerformed
+    private void assignjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignjButtonActionPerformed
         // TODO add your handling code here:
         int selectedIndex = currentOrdersjTable.getSelectedRow();
         if(selectedIndex<0 || deliveryManjComboBox.getSelectedIndex()<0) {
@@ -409,16 +345,21 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel currentOrdersModel = (DefaultTableModel) currentOrdersjTable.getModel();
-        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 3);
+        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 4);
         
-        order.setAssignedBy((RestaurantEmployee) userAccount);
-        order.setDeliveryMan(cityNetwork.getDeliveryManDirectory().getDeliveryMan().get(deliveryManjComboBox.getSelectedIndex()));
-        order.setLastUpdatedDate(new Date());
-        order.setModifiedBy(userAccount.getName());
-        order.setOrderStatus(OrderStatus.DeliveryGuyAssigned);
-        cityNetwork.getDeliveryManDirectory().getDeliveryMan().get(deliveryManjComboBox.getSelectedIndex()).getOrders().add(order);
+        for (DeliveryMan dm : areaNetwork.getDeliveryManDirectory().getDeliveryMan()){
+            if (order.getAssignedTo().getUseraccount().getName().equalsIgnoreCase(dm.getUseraccount().getName())){
+                dm.getOrders().remove(order);
+            }
+        }
+        
+        
+        order.setAcceptedBy((Employee) userAccount.getParentClass());
+        order.setAssignedTo(areaNetwork.getDeliveryManDirectory().getDeliveryMan().get(deliveryManjComboBox.getSelectedIndex()));
+        order.setOrderStatus(OrderStatus.UpforPickUp);
+        areaNetwork.getDeliveryManDirectory().getDeliveryMan().get(deliveryManjComboBox.getSelectedIndex()).getOrders().add(order);
         populateData();
-    }//GEN-LAST:event_acceptjButtonActionPerformed
+    }//GEN-LAST:event_assignjButtonActionPerformed
 
     private void currentOrdersjTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentOrdersjTableMouseClicked
         // TODO add your handling code here:
@@ -427,20 +368,20 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel currentOrdersModel = (DefaultTableModel) currentOrdersjTable.getModel();
-        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 3);
+        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 4);
         
-        DefaultTableModel currentOrderItemModel = (DefaultTableModel) currentMenuItemjTable.getModel();
-        currentOrderItemModel.setRowCount(0);
-        int count=0;
-        System.out.println(order.getMenuItems().size());
-        for(MenuItem menuItem:order.getMenuItems()){
-            count++;
-            Object[] row = new Object[2];
-            row[0]= count;
-            row[1]= menuItem.getProductName();
-            
-            currentOrderItemModel.addRow(row);
-        }
+//        DefaultTableModel currentOrderItemModel = (DefaultTableModel) currentMenuItemjTable.getModel();
+//        currentOrderItemModel.setRowCount(0);
+//        int count=0;
+//        System.out.println(order.getItems().size());
+//        for(Item item:order.getItems()){
+//            count++;
+//            Object[] row = new Object[2];
+//            row[0]= count;
+//            row[1]= item.getProductName();
+//            
+//            currentOrderItemModel.addRow(row);
+//        }
     }//GEN-LAST:event_currentOrdersjTableMouseClicked
 
     private void ordersDeliveredjTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersDeliveredjTableMouseClicked
@@ -450,20 +391,20 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel ordersDeliveredModel = (DefaultTableModel) ordersDeliveredjTable.getModel();
-        Order order = (Order) ordersDeliveredModel.getValueAt(selectedIndex, 3);
+        Order order = (Order) ordersDeliveredModel.getValueAt(selectedIndex, 4);
         
-        DefaultTableModel deliveredMenuItemModel = (DefaultTableModel) deliveredMenuItemjTable.getModel();
-        deliveredMenuItemModel.setRowCount(0);
-        int count=0;
-        System.out.println(order.getMenuItems().size());
-        for(MenuItem menuItem:order.getMenuItems()){
-            count++;
-            Object[] row = new Object[2];
-            row[0]= count;
-            row[1]= menuItem.getProductName();
-            
-            deliveredMenuItemModel.addRow(row);
-        }
+//        DefaultTableModel deliveredMenuItemModel = (DefaultTableModel) deliveredMenuItemjTable.getModel();
+//        deliveredMenuItemModel.setRowCount(0);
+//        int count=0;
+//        System.out.println(order.getItems().size());
+//        for(Item menuItem:order.getItems()){
+//            count++;
+//            Object[] row = new Object[2];
+//            row[0]= count;
+//            row[1]= menuItem.getProductName();
+//            
+//            deliveredMenuItemModel.addRow(row);
+//        }
     }//GEN-LAST:event_ordersDeliveredjTableMouseClicked
 
     private void declinejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_declinejButtonActionPerformed
@@ -474,14 +415,14 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel currentOrdersModel = (DefaultTableModel) currentOrdersjTable.getModel();
-        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 3);
-        if(order.getDeliveryMan()!=null) {
+        Order order = (Order) currentOrdersModel.getValueAt(selectedIndex, 4);
+        if(order.getAssignedTo()!=null) {
             JOptionPane.showMessageDialog(this,"Already accepted order and Delivery person is Assigned");
             return;
         }
         order.setOrderStatus(OrderStatus.Decline);
-        DefaultTableModel currentOrderItemModel = (DefaultTableModel) currentMenuItemjTable.getModel();
-        currentOrderItemModel.setRowCount(0);
+//        DefaultTableModel currentOrderItemModel = (DefaultTableModel) currentMenuItemjTable.getModel();
+//        currentOrderItemModel.setRowCount(0);
         
         populateData();
         
@@ -489,20 +430,16 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton acceptjButton;
+    private javax.swing.JButton assignjButton;
     private javax.swing.JButton backButtonjButton;
-    private javax.swing.JTable currentMenuItemjTable;
     private javax.swing.JLabel currentOrdersHeaderjLabel;
     private javax.swing.JLabel currentOrdersHeaderjLabel1;
     private javax.swing.JTable currentOrdersjTable;
     private javax.swing.JButton declinejButton;
-    private javax.swing.JTable deliveredMenuItemjTable;
     private javax.swing.JComboBox<String> deliveryManjComboBox;
     private javax.swing.JLabel deliveryPersonjLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable ordersDeliveredjTable;
     private javax.swing.JLabel pendingCountHeaderjLabel;
     private javax.swing.JLabel pendingCountjLabel;

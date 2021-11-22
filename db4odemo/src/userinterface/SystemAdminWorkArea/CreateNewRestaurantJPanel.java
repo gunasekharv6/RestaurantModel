@@ -5,7 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.Restaurant.Restaurant;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -23,12 +23,12 @@ public class CreateNewRestaurantJPanel extends javax.swing.JPanel {
      * Creates new form CreateNewRestaurantJPanel
      */
     private JPanel userProcessContainer;
-    private CityNetwork cityNetwork;
+    private AreaNetwork areaNetwork;
     private UserAccount userAccount;
     
-    public CreateNewRestaurantJPanel(JPanel userProcessContainer, UserAccount userAccount, CityNetwork cityNetwork) {
+    public CreateNewRestaurantJPanel(JPanel userProcessContainer, UserAccount userAccount, AreaNetwork cityNetwork) {
         this.userProcessContainer = userProcessContainer;
-        this.cityNetwork = cityNetwork;
+        this.areaNetwork = cityNetwork;
         this.userAccount = userAccount;
         initComponents();
     }
@@ -110,7 +110,7 @@ public class CreateNewRestaurantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addressjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(namejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(emailjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,13 +176,13 @@ public class CreateNewRestaurantJPanel extends javax.swing.JPanel {
             String email = emailjTextField.getText();
             String phoneNo = phoneNojTextField.getText();
 
-            cityNetwork.getRestaurantDirectory().getRestaurants().add(new Restaurant(restaurantName, phoneNo,
+            areaNetwork.getRestaurantDirectory().getRestaurants().add(new Restaurant(restaurantName, phoneNo,
                 address, email));
 
             JOptionPane.showMessageDialog(this, "Successfully saved New Restaurant");
             resetUi();
         }else{
-            JOptionPane.showMessageDialog(this, "Error saving Restaurant. Please check datatypes");
+            JOptionPane.showMessageDialog(this, "!Error! saving Restaurant.\nPlease check the values\nFill all the fields");
         }
     }//GEN-LAST:event_savejButtonActionPerformed
 

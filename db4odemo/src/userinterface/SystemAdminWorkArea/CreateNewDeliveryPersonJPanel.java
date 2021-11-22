@@ -6,7 +6,7 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.Validator;
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Role.Role;
@@ -30,13 +30,13 @@ public class CreateNewDeliveryPersonJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem ecoSystem;
     private UserAccount userAccount;
-    private CityNetwork cityNetwork;
+    private AreaNetwork areaNetwork;
     
-    public CreateNewDeliveryPersonJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, UserAccount userAccount, CityNetwork cityNetwork) {
+    public CreateNewDeliveryPersonJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, UserAccount userAccount, AreaNetwork areaNetwork) {
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.userAccount  = userAccount;
-        this.cityNetwork = cityNetwork;
+        this.areaNetwork = areaNetwork;
         initComponents();
     }
 
@@ -125,7 +125,7 @@ public class CreateNewDeliveryPersonJPanel extends javax.swing.JPanel {
                                 .addComponent(namejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
                                 .addComponent(namejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(emailjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,7 +176,7 @@ public class CreateNewDeliveryPersonJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordjLabel)
                     .addComponent(passwordjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addComponent(savejButton)
                 .addGap(39, 39, 39))
         );
@@ -199,15 +199,15 @@ public class CreateNewDeliveryPersonJPanel extends javax.swing.JPanel {
         if(isDataEnteredValid()) {
             
             if(Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "UserName already Exists.");
                 return;
             } 
             if(Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "Email already Exists.");
                 return;
             }
             if(Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
+                JOptionPane.showMessageDialog(this, "PhoneNo already Exists.");
                 return;
             }
             String name = namejTextField.getText();
@@ -216,14 +216,13 @@ public class CreateNewDeliveryPersonJPanel extends javax.swing.JPanel {
             String email = emailjTextField.getText();
             String phoneNo = phoneNojTextField.getText();
 
-            DeliveryMan deliveryMan = new DeliveryMan(name, phoneNo, email, userName, password, Role.Customer,
-                new Date(), new Date(), userAccount.getName(), userAccount.getName());
-            cityNetwork.getDeliveryManDirectory().getDeliveryMan().add(deliveryMan);
+            DeliveryMan deliveryMan = new DeliveryMan(name, phoneNo, email, userName, password);
+            areaNetwork.getDeliveryManDirectory().getDeliveryMan().add(deliveryMan);
 
-            JOptionPane.showMessageDialog(this, "Successfully saved the Delivery Person");
+            JOptionPane.showMessageDialog(this, "Successfully saved the Delivery Man");
             resetUi();
         }else{
-            JOptionPane.showMessageDialog(this, "Error saving the Delivery Person. Please check DataTypes");
+            JOptionPane.showMessageDialog(this, "!Error! saving the Delivery Man.\nPlease check the entered values");
         }
     }//GEN-LAST:event_savejButtonActionPerformed
 

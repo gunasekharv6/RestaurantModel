@@ -41,11 +41,11 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
     
     private void initializeUi() {
         
-        namejTextField.setText(customer.getName());
-        userNamejTextField.setText(customer.getUserName());
-        passwordjTextField.setText(customer.getPassword());
-        emailjTextField.setText(customer.getEmail());
-        phoneNojTextField.setText(customer.getPhoneNo());
+        namejTextField.setText(customer.getUseraccount().getName());
+        userNamejTextField.setText(customer.getUseraccount().getUserName());
+        passwordjTextField.setText(customer.getUseraccount().getPassword());
+        emailjTextField.setText(customer.getUseraccount().getEmail());
+        phoneNojTextField.setText(customer.getUseraccount().getPhoneNo());
     }
 
     /**
@@ -198,25 +198,23 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(isDataEnteredValid()) {
             
-            if(!customer.getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
+            if(!customer.getUseraccount().getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
                 return;
             }   
-            if(!customer.getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
+            if(!customer.getUseraccount().getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
                 return;
             }
-            if(!customer.getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
+            if(!customer.getUseraccount().getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
                 return;
             }
-            customer.setName(namejTextField.getText());
-            customer.setUserName(userNamejTextField.getText());
-            customer.setPassword(passwordjTextField.getText());
-            customer.setEmail(emailjTextField.getText());
-            customer.setPhoneNo(phoneNojTextField.getText());
-            customer.setModifiedBy(userAccount.getName());
-            customer.setLastUpdatedDate(new Date());
+            customer.getUseraccount().setName(namejTextField.getText());
+            customer.getUseraccount().setUserName(userNamejTextField.getText());
+            customer.getUseraccount().setPassword(passwordjTextField.getText());
+            customer.getUseraccount().setEmail(emailjTextField.getText());
+            customer.getUseraccount().setPhoneNo(phoneNojTextField.getText());
 
             JOptionPane.showMessageDialog(this, "Successfully Updated the Customer");
         }else{

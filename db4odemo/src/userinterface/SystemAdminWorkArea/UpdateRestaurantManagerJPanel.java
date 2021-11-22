@@ -7,7 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.Validator;
 import Business.EcoSystem;
-import Business.Employee.RestaurantEmployee;
+import Business.Employee.Employee;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -27,10 +27,10 @@ public class UpdateRestaurantManagerJPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private UserAccount userAccount;
-    private RestaurantEmployee restaurantEmployee;
+    private Employee restaurantEmployee;
     private EcoSystem ecoSystem;
     
-    public UpdateRestaurantManagerJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, UserAccount userAccount, RestaurantEmployee restaurantEmployee) {
+    public UpdateRestaurantManagerJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, UserAccount userAccount, Employee restaurantEmployee) {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.restaurantEmployee = restaurantEmployee;
@@ -41,11 +41,11 @@ public class UpdateRestaurantManagerJPanel extends javax.swing.JPanel {
 
     private void initializeData() {
         
-        namejTextField.setText(restaurantEmployee.getName());
-        userNamejTextField.setText(restaurantEmployee.getUserName());
-        passwordjTextField.setText(restaurantEmployee.getPassword());
-        phoneNojTextField.setText(restaurantEmployee.getPhoneNo());
-        emailjTextField.setText(restaurantEmployee.getEmail());
+        namejTextField.setText(restaurantEmployee.getUseraccount().getName());
+        userNamejTextField.setText(restaurantEmployee.getUseraccount().getUserName());
+        passwordjTextField.setText(restaurantEmployee.getUseraccount().getPassword());
+        phoneNojTextField.setText(restaurantEmployee.getUseraccount().getPhoneNo());
+        emailjTextField.setText(restaurantEmployee.getUseraccount().getEmail());
     }
     
     /**
@@ -171,12 +171,13 @@ public class UpdateRestaurantManagerJPanel extends javax.swing.JPanel {
                         .addComponent(emailjLabel)
                         .addComponent(emailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordjLabel)
-                    .addComponent(passwordjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(phoneNojLabel)
-                        .addComponent(phoneNojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(phoneNojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(passwordjLabel)
+                        .addComponent(passwordjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addComponent(updatejButton)
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -198,29 +199,27 @@ public class UpdateRestaurantManagerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(isDataEnteredValid()) {
             
-            if(!restaurantEmployee.getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
+            if(!restaurantEmployee.getUseraccount().getUserName().equals(userNamejTextField.getText()) && Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
+                JOptionPane.showMessageDialog(this, "UserName already Exists.\nPlease try with a new username");
                 return;
             }
-            if(!restaurantEmployee.getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
+            if(!restaurantEmployee.getUseraccount().getEmail().equals(emailjTextField.getText()) && Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
+                JOptionPane.showMessageDialog(this, "Email already Exists.\nPlease try with a new Email");
                 return;
             }
-            if(!restaurantEmployee.getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
-                JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
+            if(!restaurantEmployee.getUseraccount().getPhoneNo().equals(phoneNojTextField.getText()) && Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
+                JOptionPane.showMessageDialog(this, "PhoneNo already Exists.\nPlease try with a new PhoneNo");
                 return;
             }
-            restaurantEmployee.setName(namejTextField.getText());
-            restaurantEmployee.setUserName(userNamejTextField.getText());
-            restaurantEmployee.setPassword(passwordjTextField.getText());
-            restaurantEmployee.setEmail(emailjTextField.getText());
-            restaurantEmployee.setPhoneNo(phoneNojTextField.getText());
-            restaurantEmployee.setLastUpdatedDate(new Date());
-            restaurantEmployee.setModifiedBy(userAccount.getName());
+            restaurantEmployee.getUseraccount().setName(namejTextField.getText());
+            restaurantEmployee.getUseraccount().setUserName(userNamejTextField.getText());
+            restaurantEmployee.getUseraccount().setPassword(passwordjTextField.getText());
+            restaurantEmployee.getUseraccount().setEmail(emailjTextField.getText());
+            restaurantEmployee.getUseraccount().setPhoneNo(phoneNojTextField.getText());
 
             JOptionPane.showMessageDialog(this, "Successfully Updated the Restaurant Manager");
         }else {
-            JOptionPane.showMessageDialog(this, "Error Updating the Restaurant Manager. Please check Datatypes");
+            JOptionPane.showMessageDialog(this, "!Error! Updating the Restaurant Manager.\nPlease check the values");
         }
     }//GEN-LAST:event_updatejButtonActionPerformed
 

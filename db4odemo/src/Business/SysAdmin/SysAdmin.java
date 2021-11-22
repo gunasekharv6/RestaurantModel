@@ -13,15 +13,25 @@ import java.util.Date;
  *
  * @author gunav
  */
-public class SysAdmin extends UserAccount{
+public class SysAdmin{
+    private UserAccount  userAccount;
     
-    public SysAdmin(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(name, phoneNo, email, userName, password, role, createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public SysAdmin(String name, String phoneNo, String email, String userName, String password) {
+        userAccount = new UserAccount(name, phoneNo, email, userName, password, Role.SysAdmin);
+        userAccount.setParentClass(this);
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     @Override
     public String toString() {
-        return getName(); //To change body of generated methods, choose Tools | Templates.
+        return userAccount.getName(); //To change body of generated methods, choose Tools | Templates.
     }
     
     

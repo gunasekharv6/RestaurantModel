@@ -5,7 +5,6 @@
  */
 package Business.SysAdmin;
 
-import Business.ModificationInfo;
 import Business.Role.Role;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,17 +14,17 @@ import java.util.List;
  *
  * @author gunav
  */
-public class SysAdminDirectory extends ModificationInfo{
+public class SysAdminDirectory{
     
     private List<SysAdmin> sysAdmins = new ArrayList<>();
 
-    public SysAdminDirectory(List<SysAdmin> sysAdmins, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public SysAdminDirectory(List<SysAdmin> sysAdmins) {
+        
         this.sysAdmins = sysAdmins;
     }
     
-    public SysAdminDirectory(Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-         super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public SysAdminDirectory() {
+         
     }
     
     public List<SysAdmin> getSysAdmins() {
@@ -36,9 +35,9 @@ public class SysAdminDirectory extends ModificationInfo{
         this.sysAdmins = sysAdmins;
     }
     
-    public void createSysAdmin(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
+    public void createSysAdmin(String name, String phoneNo, String email, String userName, String password) {
         
-        getSysAdmins().add(new SysAdmin(name,phoneNo,email,userName,password,role,createdDate,lastUpdatedDate,createdBy,modifiedBy));
+        getSysAdmins().add(new SysAdmin(name,phoneNo,email,userName,password));
         
     }
     
@@ -46,7 +45,7 @@ public class SysAdminDirectory extends ModificationInfo{
         
         if(!getSysAdmins().isEmpty()){
             for(SysAdmin sysAdmin:getSysAdmins()){
-                if(sysAdmin.getUserName().equals(userName) && sysAdmin.getPassword().equals(password)){
+                if(sysAdmin.getUserAccount().getUserName().equals(userName) && sysAdmin.getUserAccount().getPassword().equals(password)){
                     return sysAdmin;
                 }
             }

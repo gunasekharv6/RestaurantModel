@@ -16,13 +16,22 @@ import java.util.List;
  *
  * @author gunav
  */
-public class DeliveryMan extends UserAccount{
+public class DeliveryMan {
+    
+    private UserAccount useraccount;
     
     private List<Order> orders = new ArrayList<>();
 
-    public DeliveryMan(String name, String phoneNo, String email, String userName, String password, Role role, Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(name, phoneNo, email, userName, password, role, createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public DeliveryMan(String name, String phoneNo, String email, String userName, String password) {
+        
+        this.useraccount = new UserAccount(name, phoneNo, email, userName, password, Role.DeliveryMan);
+        this.useraccount.setParentClass(this);
     }
+    
+//    public Order addOrder(Order order){
+//        for (Order order : )
+//        this.orders.add(order);
+//    }
 
     public List<Order> getOrders() {
         return orders;
@@ -32,9 +41,17 @@ public class DeliveryMan extends UserAccount{
         this.orders = orders;
     }
 
+    public UserAccount getUseraccount() {
+        return useraccount;
+    }
+
+    public void setUseraccount(UserAccount useraccount) {
+        this.useraccount = useraccount;
+    }
+       
     @Override
     public String toString() {
-        return getName(); //To change body of generated methods, choose Tools | Templates.
+        return this.useraccount.getName(); //To change body of generated methods, choose Tools | Templates.
     }
     
     

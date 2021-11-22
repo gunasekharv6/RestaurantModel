@@ -45,10 +45,10 @@ public class ManageCustomerJpanel extends javax.swing.JPanel {
             Object[] row = new Object[6];
             row[0]=count;
             row[1]=customer;
-            row[2]=customer.getUserName();
-            row[3]=customer.getPassword();
-            row[4]=customer.getPhoneNo();
-            row[5]=customer.getEmail();
+            row[2]=customer.getUseraccount().getUserName();
+            row[3]=customer.getUseraccount().getPassword();
+            row[4]=customer.getUseraccount().getPhoneNo();
+            row[5]=customer.getUseraccount().getEmail();
 //            row[6]=customer.getCreatedBy();
 //            row[7]=customer.getCreatedDate();
 //            row[8]=customer.getModifiedBy();

@@ -5,11 +5,10 @@
  */
 package Business.Restaurant;
 
-import Business.CityNetwork;
+import Area.AreaNetwork;
 import Business.Customer.Customer;
 import Business.DeliveryMan.DeliveryMan;
-import Business.Employee.RestaurantEmployee;
-import Business.ModificationInfo;
+import Business.Employee.Employee;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,9 +17,16 @@ import java.util.List;
  *
  * @author gunav
  */
-public class Order extends ModificationInfo{
+public class Order {
     
-    private List<MenuItem> menuItems = new ArrayList<>();
+    private final List<Item> items = new ArrayList<Item>();
+    private Customer orderedBy;
+    private Employee acceptedBy;
+    private DeliveryMan assignedTo;
+    private Double totalPrice;
+    private OrderStatus orderStatus;
+    private Restaurant restaurant;
+    private AreaNetwork areaNetwork;
     
     private String customerInstructions;
     
@@ -30,56 +36,100 @@ public class Order extends ModificationInfo{
     
     private String deliveryPersonFeedback;
     
-    private Customer orderedBy;
-    
-    private RestaurantEmployee assignedBy;
-    
     private String address;
     
     private int customerDeliveryRating;
     
     private int deliveryPersonCustomerRating;
     
-    private Restaurant restaurant;
-    
-    private CityNetwork cityNetwork;
-    
-    private Double totalPrice;
-    
-    private OrderStatus orderStatus;
-    
-    private DeliveryMan deliveryMan;
+    private Date createdDate; 
 
-    public Order(Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
-    }
-
-    public Order(String customerInstructions, String customerFeedBack, String managerFeedback, String deliveryPersonFeedback, Customer orderedBy, RestaurantEmployee assignedBy, String address, 
-            int customerDeliveryRating, int deliveryPersonCustomerRating, Restaurant restaurant, CityNetwork cityNetwork, OrderStatus orderStatus, Double totalPrice, DeliveryMan deliveryMan,
-            Date createdDate, Date lastUpdatedDate, String createdBy, String modifiedBy) {
-        super(createdDate, lastUpdatedDate, createdBy, modifiedBy);
+    public Order(String customerInstructions, String customerFeedBack, String managerFeedback, String deliveryPersonFeedback, Customer orderedBy, Employee acceptedBy, String address, 
+            int customerDeliveryRating, int deliveryPersonCustomerRating, Restaurant restaurant, AreaNetwork areaNetwork, OrderStatus orderStatus, Double totalPrice, DeliveryMan deliveryMan,
+            Date createdDate) {
+        this.orderedBy = orderedBy;
+        this.acceptedBy = acceptedBy;
+        this.assignedTo = assignedTo;
+        this.totalPrice = totalPrice;
+        this.orderStatus = orderStatus;
+        this.restaurant = restaurant;
+        this.areaNetwork = areaNetwork;
         this.customerInstructions = customerInstructions;
         this.customerFeedBack = customerFeedBack;
         this.managerFeedback = managerFeedback;
         this.deliveryPersonFeedback = deliveryPersonFeedback;
-        this.orderedBy = orderedBy;
-        this.assignedBy = assignedBy;
         this.address = address;
         this.customerDeliveryRating = customerDeliveryRating;
         this.deliveryPersonCustomerRating = deliveryPersonCustomerRating;
-        this.restaurant = restaurant;
-        this.cityNetwork = cityNetwork;
+        this.createdDate = new Date();
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    
+    public Customer getOrderedBy() {
+        return orderedBy;
+    }
+
+    public void setOrderedBy(Customer orderedBy) {
+        this.orderedBy = orderedBy;
+    }
+
+    public Employee getAcceptedBy() {
+        return acceptedBy;
+    }
+
+    public void setAcceptedBy(Employee acceptedBy) {
+        this.acceptedBy = acceptedBy;
+    }
+
+    public DeliveryMan getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(DeliveryMan assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
-        this.deliveryMan = deliveryMan;
     }
 
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setMenuItems(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public AreaNetwork getAreaNetwork() {
+        return areaNetwork;
+    }
+
+    public void setAreaNetwork(AreaNetwork areaNetwork) {
+        this.areaNetwork = areaNetwork;
     }
 
     public String getCustomerInstructions() {
@@ -114,14 +164,6 @@ public class Order extends ModificationInfo{
         this.deliveryPersonFeedback = deliveryPersonFeedback;
     }
 
-    public Customer getOrderedBy() {
-        return orderedBy;
-    }
-
-    public void setOrderedBy(Customer orderedBy) {
-        this.orderedBy = orderedBy;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -146,57 +188,14 @@ public class Order extends ModificationInfo{
         this.deliveryPersonCustomerRating = deliveryPersonCustomerRating;
     }
 
-    public RestaurantEmployee getAssignedBy() {
-        return assignedBy;
-    }
-
-    public void setAssignedBy(RestaurantEmployee assignedBy) {
-        this.assignedBy = assignedBy;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public CityNetwork getCityNetwork() {
-        return cityNetwork;
-    }
-
-    public void setCityNetwork(CityNetwork cityNetwork) {
-        this.cityNetwork = cityNetwork;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public DeliveryMan getDeliveryMan() {
-        return deliveryMan;
-    }
-
-    public void setDeliveryMan(DeliveryMan deliveryMan) {
-        this.deliveryMan = deliveryMan;
-    }
-    
     @Override
     public String toString() {
-        return String.valueOf(getTotalPrice());
+        return String.valueOf(totalPrice);
     }
+
+    
+    
+    
+    
     
 }

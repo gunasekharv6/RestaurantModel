@@ -7,7 +7,7 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.Validator;
 import Business.EcoSystem;
-import Business.Employee.RestaurantEmployee;
+import Business.Employee.Employee;
 import Business.Restaurant.Restaurant;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -208,8 +208,7 @@ public class CreateRestaurantManagerJPanel extends javax.swing.JPanel {
             String email = emailjTextField.getText();
             String phoneNo = phoneNojTextField.getText();
 
-            restaurant.getRestaurantEmployeeDirectory().getEmployeeList().add(new RestaurantEmployee(name, phoneNo, email, userName, password, Role.RestaurantAdmin,
-                new Date(), new Date(), userAccount.getName(), userAccount.getName()));
+            restaurant.getEmployeeDirectory().getEmployeeList().add(new Employee(name, phoneNo, email, userName, password));
 
             JOptionPane.showMessageDialog(this, "Successfully saved the Restaurant Manager");
             resetUi();

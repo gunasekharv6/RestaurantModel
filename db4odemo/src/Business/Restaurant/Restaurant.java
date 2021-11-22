@@ -5,7 +5,7 @@
  */
 package Business.Restaurant;
 
-import Business.Employee.RestaurantEmployeeDirectory;
+import Business.Employee.EmployeeDirectory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +13,8 @@ import java.util.List;
  *
  * @author gunav
  */
+
+
 public class Restaurant {
     
     private String restaurantName;
@@ -23,9 +25,9 @@ public class Restaurant {
     
     private String email;
     
-    private List<MenuItem> menuItems = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
     
-    private RestaurantEmployeeDirectory restaurantEmployeeDirectory = new RestaurantEmployeeDirectory();
+    private EmployeeDirectory employeeDirectory = new EmployeeDirectory();
     
     private List<Order> orders = new ArrayList<>();
 
@@ -36,20 +38,20 @@ public class Restaurant {
         this.email = email;
     }
 
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setMenuItems(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public void setMenuItems(List<Item> items) {
+        this.items = items;
     }
 
-    public RestaurantEmployeeDirectory getRestaurantEmployeeDirectory() {
-        return restaurantEmployeeDirectory;
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employeeDirectory;
     }
 
-    public void setRestaurantEmployeeDirectory(RestaurantEmployeeDirectory restaurantEmployeeDirectory) {
-        this.restaurantEmployeeDirectory = restaurantEmployeeDirectory;
+    public void setEmployeeDirectory(EmployeeDirectory employeeDirectory) {
+        this.employeeDirectory = employeeDirectory;
     }
 
     public List<Order> getOrders() {
@@ -98,3 +100,4 @@ public class Restaurant {
     }
    
 }
+

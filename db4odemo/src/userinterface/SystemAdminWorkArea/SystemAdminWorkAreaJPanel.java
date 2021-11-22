@@ -5,8 +5,8 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.CityName;
-import Business.CityNetwork;
+import Area.AreaName;
+import Area.AreaNetwork;
 import Business.EcoSystem;
 import Business.SysAdmin.SysAdmin;
 import Business.UserAccount.UserAccount;
@@ -34,23 +34,23 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.userLogged=userLogged;
-        populateCities();
+        populateAreas();
         populateSysAdmins();
     }
     
-    private void populateCities() {
+    private void populateAreas() {
         
-        List<CityNetwork> cityNetworks = ecosystem.getCityNetworks();
-        cityjComboBox.removeAllItems();
-        for(CityNetwork cityNetwork:cityNetworks){
-            cityjComboBox.addItem(cityNetwork.getCityName().name());
+        List<AreaNetwork> areaNetworks = ecosystem.getAreaNetworks();
+        areajComboBox.removeAllItems();
+        for(AreaNetwork areaNetwork:areaNetworks){
+            areajComboBox.addItem(areaNetwork.getAreaName().name());
         }
         
-        addCityjComboBox.removeAllItems();
-        for(String cityName:CityName.getCitiesList()){
-            addCityjComboBox.addItem(cityName);
+        addAreajComboBox.removeAllItems();
+        for(String areaName:AreaName.getAreasList()){
+            addAreajComboBox.addItem(areaName);
         }
-        addCityjComboBox.setSelectedIndex(addCityjComboBox.getItemCount()-1);
+        addAreajComboBox.setSelectedIndex(addAreajComboBox.getItemCount()-1);
     }
     
     public void populateSysAdmins() {
@@ -64,12 +64,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             Object[] row = new Object[6];
             row[0]=sysAdminsCount;
             row[1]=sysAdmin;
-            row[2]=sysAdmin.getUserName();
-            row[3]=sysAdmin.getPassword();
-            row[4]=sysAdmin.getEmail();
-            row[5]=sysAdmin.getPhoneNo();
-//            row[6]=sysAdmin.getCreatedBy();
-//            row[7]=sysAdmin.getCreatedDate();
+            row[2]=sysAdmin.getUserAccount().getUserName();
+            row[3]=sysAdmin.getUserAccount().getPassword();
+            row[4]=sysAdmin.getUserAccount().getEmail();
+            row[5]=sysAdmin.getUserAccount().getPhoneNo();
             
             sysAdminsModel.addRow(row);
         }
@@ -85,12 +83,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cityjComboBox = new javax.swing.JComboBox<>();
+        areajComboBox = new javax.swing.JComboBox<>();
         headerjLabel = new javax.swing.JLabel();
         proceedjButton = new javax.swing.JButton();
         headerjLabel1 = new javax.swing.JLabel();
-        addCityjComboBox = new javax.swing.JComboBox<>();
-        addCityjButton = new javax.swing.JButton();
+        addAreajComboBox = new javax.swing.JComboBox<>();
+        addAreajButton = new javax.swing.JButton();
         manageSysAdminsjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sysAdminsjTable = new javax.swing.JTable();
@@ -102,9 +100,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        headerjLabel.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        headerjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         headerjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerjLabel.setText("City");
+        headerjLabel.setText("Choose a network from the below list TO PROCEED");
 
         proceedjButton.setText("Proceed >");
         proceedjButton.addActionListener(new java.awt.event.ActionListener() {
@@ -113,20 +111,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        headerjLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        headerjLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         headerjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerjLabel1.setText("Add City?");
+        headerjLabel1.setText("Add Area? Choose from the list below");
 
-        addCityjButton.setText("Add City");
-        addCityjButton.addActionListener(new java.awt.event.ActionListener() {
+        addAreajButton.setText("Add Area");
+        addAreajButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCityjButtonActionPerformed(evt);
+                addAreajButtonActionPerformed(evt);
             }
         });
 
-        manageSysAdminsjLabel.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        manageSysAdminsjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         manageSysAdminsjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageSysAdminsjLabel.setText("Manage System Admins");
+        manageSysAdminsjLabel.setText("Manage System Administrators");
 
         sysAdminsjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,7 +134,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Serial No", "Name", "UserName", "Password", "Email", "Contact No"
+                "S.No", "Name", "UserName", "Password", "Email", "Contact No"
             }
         ) {
             Class[] types = new Class [] {
@@ -193,43 +191,41 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(areajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(proceedjButton)
+                        .addGap(179, 179, 179)
+                        .addComponent(addAreajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addAreajButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(66, 66, 66)
                         .addComponent(headerjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(242, 242, 242)
-                                .addComponent(proceedjButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(251, 251, 251)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addCityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(addCityjButton)
-                                .addGap(88, 88, 88))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addComponent(manageSysAdminsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(countLablejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(countTotaljLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145)
-                        .addComponent(updatejButton)
-                        .addGap(89, 89, 89)
-                        .addComponent(deletejButton)
-                        .addGap(91, 91, 91)
-                        .addComponent(createjButton)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addComponent(countTotaljLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(125, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(createjButton)
+                    .addComponent(updatejButton)
+                    .addComponent(deletejButton))
+                .addGap(23, 23, 23))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {createjButton, deletejButton, updatejButton});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -237,32 +233,28 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(headerjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(addCityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(addCityjButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(proceedjButton)))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(areajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addAreajComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addAreajButton)
+                    .addComponent(proceedjButton))
+                .addGap(68, 68, 68)
                 .addComponent(manageSysAdminsjLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(createjButton)
+                        .addGap(34, 34, 34)
+                        .addComponent(updatejButton)
+                        .addGap(41, 41, 41)
+                        .addComponent(deletejButton)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(countLablejLabel)
-                    .addComponent(countTotaljLabel)
-                    .addComponent(updatejButton)
-                    .addComponent(deletejButton)
-                    .addComponent(createjButton))
-                .addContainerGap(158, Short.MAX_VALUE))
+                    .addComponent(countTotaljLabel))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -270,27 +262,27 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void proceedjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedjButtonActionPerformed
         // TODO add your handling code here:
-        int selectedIndex = cityjComboBox.getSelectedIndex();
-        
+        int selectedIndex = areajComboBox.getSelectedIndex();
+        System.out.println("Inside SystemAdminWorkAreaJPanel Panel -- proceedjButtonActionPerformed ");
+        System.out.println("____________"+ecosystem.getAreaNetworks().get(selectedIndex)+"---------------");
         CardLayout cardLayout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("adminMasterCityPanel",new SystemAdminManageCity(userProcessContainer,ecosystem,
-                ecosystem.getCityNetworks().get(selectedIndex), userLogged));
+        userProcessContainer.add("adminMasterCityAreaPanel",new SystemAdminManageArea(userProcessContainer,ecosystem, ecosystem.getAreaNetworks().get(selectedIndex), userLogged));
         cardLayout.next(userProcessContainer);
+        
     }//GEN-LAST:event_proceedjButtonActionPerformed
 
-    private void addCityjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCityjButtonActionPerformed
+    private void addAreajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAreajButtonActionPerformed
         // TODO add your handling code here:
         
-        for(CityNetwork cityNetwork:ecosystem.getCityNetworks()) {
-            if(cityNetwork.getCityName().name().equalsIgnoreCase((String) addCityjComboBox.getSelectedItem())){
-                JOptionPane.showMessageDialog(this, "City Already Exists. Please select another one");
+        for(AreaNetwork areaNetwork:ecosystem.getAreaNetworks()) {
+            if(areaNetwork.getAreaName().name().equalsIgnoreCase((String) addAreajComboBox.getSelectedItem())){
+                JOptionPane.showMessageDialog(this, "Area Already Exists. Please select another one");
                 return;
             }
         }
-        ecosystem.getCityNetworks().add(new CityNetwork(CityName.valueOf((String) addCityjComboBox.getSelectedItem()), new Date(), 
-                new Date(), userLogged.getName(), userLogged.getName()));
-        populateCities();
-    }//GEN-LAST:event_addCityjButtonActionPerformed
+        ecosystem.getAreaNetworks().add(new AreaNetwork(AreaName.valueOf((String) addAreajComboBox.getSelectedItem())));
+        populateAreas();
+    }//GEN-LAST:event_addAreajButtonActionPerformed
 
     private void createjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createjButtonActionPerformed
         // TODO add your handling code here:
@@ -324,7 +316,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         
         DefaultTableModel sysAdminsModel = (DefaultTableModel) sysAdminsjTable.getModel();
         SysAdmin sysAdmin = (SysAdmin) sysAdminsModel.getValueAt(selectedSysAdmin, 1);
-        if(ecosystem.getSysAdminDirectory().getSysAdmins().size()==1 || sysAdmin.getUserName().equals(userLogged.getUserName())){
+        if(ecosystem.getSysAdminDirectory().getSysAdmins().size()==1 || sysAdmin.getUserAccount().getUserName().equals(userLogged.getUserName())){
             JOptionPane.showMessageDialog(this, "Cannot delete Yourself");
             return;
         }
@@ -334,9 +326,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addCityjButton;
-    private javax.swing.JComboBox<String> addCityjComboBox;
-    private javax.swing.JComboBox<String> cityjComboBox;
+    private javax.swing.JButton addAreajButton;
+    private javax.swing.JComboBox<String> addAreajComboBox;
+    private javax.swing.JComboBox<String> areajComboBox;
     private javax.swing.JLabel countLablejLabel;
     private javax.swing.JLabel countTotaljLabel;
     private javax.swing.JButton createjButton;
