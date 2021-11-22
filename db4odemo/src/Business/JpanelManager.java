@@ -15,7 +15,7 @@ import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class JpanelManager {
     

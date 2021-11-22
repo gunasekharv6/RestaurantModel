@@ -5,7 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.ApplicationHelper;
+import Business.Validator;
 import Business.Customer.Customer;
 import Business.EcoSystem;
 import Business.Role.Role;
@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class CreateNewCustomerJPanel extends javax.swing.JPanel {
 
@@ -73,11 +73,11 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
 
         namejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         namejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        namejLabel.setText("Name :");
+        namejLabel.setText("Customer Name :");
 
         userNamejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         userNamejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        userNamejLabel.setText("User Name :");
+        userNamejLabel.setText("User Account Name :");
 
         passwordjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         passwordjLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -89,7 +89,7 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
 
         phoneNojLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         phoneNojLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        phoneNojLabel.setText("Phone No :");
+        phoneNojLabel.setText("Contact No :");
 
         savejButton.setText("Save");
         savejButton.addActionListener(new java.awt.event.ActionListener() {
@@ -113,10 +113,6 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
                         .addGap(161, 161, 161)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(userNamejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(userNamejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(namejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
                                 .addComponent(namejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,7 +130,12 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
                                 .addComponent(phoneNojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(272, 272, 272)
-                        .addComponent(savejButton)))
+                        .addComponent(savejButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(userNamejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(userNamejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,15 +187,15 @@ public class CreateNewCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(isDataEnteredValid()) {
             
-            if(ApplicationHelper.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
+            if(Validator.checkUserNameAlreadyExists(ecoSystem, userNamejTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "UserName already Exists in the Ecosystem.");
                 return;
             }
-            if(ApplicationHelper.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
+            if(Validator.checkEmailAlreadyExists(ecoSystem, emailjTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "Email already Exists in the Ecosystem.");
                 return;
             }
-            if(ApplicationHelper.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
+            if(Validator.checkPhoneNoAlreadyExists(ecoSystem, phoneNojTextField.getText())) {
                 JOptionPane.showMessageDialog(this, "PhoneNo already Exists in the Ecosystem.");
                 return;
             }

@@ -32,10 +32,7 @@
                           <Component id="jScrollPane2" min="-2" pref="769" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="88" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="feedbackjTextField" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="358" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="ratingjComboBox" min="-2" max="-2" attributes="0"/>
@@ -66,8 +63,6 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="deliveredjButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="feedbackjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ratingjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -106,9 +101,9 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
-                <Column editable="false" title="Serial-No" type="java.lang.Integer"/>
+                <Column editable="false" title="S.No" type="java.lang.Integer"/>
                 <Column editable="false" title="CustomerName" type="java.lang.Object"/>
-                <Column editable="false" title="SpecialRequests" type="java.lang.String"/>
+                <Column editable="false" title="Customer Notes" type="java.lang.String"/>
                 <Column editable="false" title="Total Price($)" type="java.lang.Object"/>
                 <Column editable="false" title="Status" type="java.lang.String"/>
                 <Column editable="false" title="AssignedBy" type="java.lang.String"/>
@@ -181,7 +176,7 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
-                <Column editable="false" title="Serial-No" type="java.lang.Integer"/>
+                <Column editable="false" title="S.No" type="java.lang.Integer"/>
                 <Column editable="false" title="CustomerName" type="java.lang.Object"/>
                 <Column editable="false" title="SpecialRequests" type="java.lang.String"/>
                 <Column editable="false" title="Total Price($)" type="java.lang.Object"/>
@@ -241,21 +236,11 @@
     </Container>
     <Component class="javax.swing.JButton" name="deliveredjButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mark Delivered"/>
+        <Property name="text" type="java.lang.String" value="Delivered ?"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deliveredjButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Grande" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Feedback :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="feedbackjTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

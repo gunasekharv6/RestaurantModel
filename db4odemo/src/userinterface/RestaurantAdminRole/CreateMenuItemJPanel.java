@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class CreateMenuItemJPanel extends javax.swing.JPanel {
 
@@ -52,6 +52,8 @@ public class CreateMenuItemJPanel extends javax.swing.JPanel {
         pricejLabel = new javax.swing.JLabel();
         savejButton = new javax.swing.JButton();
 
+        setForeground(new java.awt.Color(153, 255, 153));
+
         backButtonjButton.setText("< < Back");
         backButtonjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,11 +67,11 @@ public class CreateMenuItemJPanel extends javax.swing.JPanel {
 
         menuNamejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         menuNamejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        menuNamejLabel.setText("Menu Name :");
+        menuNamejLabel.setText("Item Name :");
 
         pricejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         pricejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        pricejLabel.setText("Price ($)  :");
+        pricejLabel.setText("Cost ($)  :");
 
         savejButton.setText("Save");
         savejButton.addActionListener(new java.awt.event.ActionListener() {

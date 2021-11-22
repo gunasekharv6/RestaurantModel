@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class ConfigureASystem {
     

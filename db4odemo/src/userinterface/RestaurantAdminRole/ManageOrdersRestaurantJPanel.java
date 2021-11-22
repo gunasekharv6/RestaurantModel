@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
@@ -140,7 +140,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
         currentOrdersHeaderjLabel.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         currentOrdersHeaderjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        currentOrdersHeaderjLabel.setText("Orders On Plate");
+        currentOrdersHeaderjLabel.setText("Manage Orders");
 
         currentOrdersjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,7 +150,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Serial-No", "CustomerName", "SpecialRequests", "Total Price($)", "Status", "DeliveryPerson"
+                "S.No", "CustomerName", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
             }
         ) {
             Class[] types = new Class [] {
@@ -187,7 +187,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Serial No", "Menu Item"
+                "S.No", "Item"
             }
         ) {
             Class[] types = new Class [] {
@@ -212,7 +212,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
 
         currentOrdersHeaderjLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         currentOrdersHeaderjLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        currentOrdersHeaderjLabel1.setText("Orders Delivered/Declined");
+        currentOrdersHeaderjLabel1.setText("Order Directory");
 
         ordersDeliveredjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +222,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Serial-No", "CustomerName", "SpecialRequests", "Total Price($)", "Status", "DeliveryPerson"
+                "S.No", "CustomerName", "Notes", "Total Price($)", "Status of the Order", "DeliveryExecutive"
             }
         ) {
             Class[] types = new Class [] {
@@ -259,7 +259,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Serial No", "Menu Item"
+                "S.No", "Item"
             }
         ) {
             Class[] types = new Class [] {
@@ -285,7 +285,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         deliveryPersonjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         deliveryPersonjLabel.setText("Choose Delivery Person :");
 
-        acceptjButton.setText("Accept and Assign Order");
+        acceptjButton.setText("Assign Order?");
         acceptjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptjButtonActionPerformed(evt);
@@ -305,7 +305,7 @@ public class ManageOrdersRestaurantJPanel extends javax.swing.JPanel {
         pendingCountjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         pendingCountjLabel.setText("0");
 
-        declinejButton.setText("Decline");
+        declinejButton.setText("Decline Order?");
         declinejButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 declinejButtonActionPerformed(evt);

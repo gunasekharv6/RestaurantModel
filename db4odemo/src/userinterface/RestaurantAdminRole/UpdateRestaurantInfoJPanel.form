@@ -17,35 +17,40 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="backButtonjButton" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="143" pref="143" max="-2" attributes="0"/>
+              <Component id="headerjLabel" min="-2" pref="384" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="backButtonjButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="restaurantNamejLabel" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="restaurantNamejTextField" min="-2" pref="165" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="restaurantNamejLabel" alignment="2" min="-2" pref="135" max="-2" attributes="0"/>
-                          <Component id="phoneNojLabel" alignment="2" min="-2" pref="122" max="-2" attributes="0"/>
                           <Component id="emailjLabel" alignment="2" min="-2" pref="122" max="-2" attributes="0"/>
                           <Component id="addressjLabel" alignment="2" min="-2" pref="122" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="phoneNojTextField" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Component id="restaurantNamejTextField" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
                           <Component id="emailjTextField" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
                           <Component id="addressjTextField" alignment="2" min="-2" pref="165" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="143" pref="143" max="-2" attributes="0"/>
-                      <Component id="headerjLabel" min="-2" pref="384" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
-                      <Component id="updatejButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="phoneNojLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="phoneNojTextField" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="140" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Component id="updatejButton" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +62,7 @@
                   <Component id="backButtonjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="headerjLabel" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="restaurantNamejLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="restaurantNamejTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -66,6 +71,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="phoneNojLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="phoneNojTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="updatejButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -77,9 +83,7 @@
                   <Component id="addressjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addressjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="updatejButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,7 +125,7 @@
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Phone No :"/>
+        <Property name="text" type="java.lang.String" value="Contact :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="emailjLabel">

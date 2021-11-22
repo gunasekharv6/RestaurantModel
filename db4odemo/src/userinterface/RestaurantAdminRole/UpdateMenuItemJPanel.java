@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class UpdateMenuItemJPanel extends javax.swing.JPanel {
 
@@ -77,7 +77,7 @@ public class UpdateMenuItemJPanel extends javax.swing.JPanel {
 
         menuNamejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         menuNamejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        menuNamejLabel.setText("Menu Name :");
+        menuNamejLabel.setText("Item :");
 
         pricejLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         pricejLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

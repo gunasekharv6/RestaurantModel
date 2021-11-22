@@ -28,11 +28,6 @@
                       <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="userNamejLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="userNamejTextField" min="-2" pref="165" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
                               <Component id="namejLabel" min="-2" pref="122" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="namejTextField" min="-2" pref="165" max="-2" attributes="0"/>
@@ -57,6 +52,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
                       <Component id="savejButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="userNamejLabel" min="-2" pref="144" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="userNamejTextField" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="195" max="32767" attributes="0"/>
@@ -127,7 +128,7 @@
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Name :"/>
+        <Property name="text" type="java.lang.String" value="Customer Name :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="namejTextField">
@@ -138,7 +139,7 @@
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="User Name :"/>
+        <Property name="text" type="java.lang.String" value="User Account Name :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="userNamejTextField">
@@ -171,7 +172,7 @@
           <Font name="Lucida Grande" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Phone No :"/>
+        <Property name="text" type="java.lang.String" value="Contact No :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="phoneNojTextField">

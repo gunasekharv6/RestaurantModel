@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class SysAdminDirectory extends ModificationInfo{
     

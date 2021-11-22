@@ -26,40 +26,39 @@
                       <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
                       <Component id="headerjLabel" min="-2" pref="384" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="addressjLabel" alignment="2" min="-2" pref="122" max="-2" attributes="0"/>
+                  <Component id="namejLabel" alignment="2" min="-2" pref="137" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="addressjTextField" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="namejTextField" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Component id="addressjLabel" alignment="2" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <Component id="namejLabel" alignment="2" min="-2" pref="137" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="addressjTextField" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="namejTextField" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="emailjLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="emailjTextField" min="-2" pref="165" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="phoneNojLabel" min="-2" pref="122" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="phoneNojTextField" min="-2" pref="165" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
-                              <Component id="savejButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="emailjLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="emailjTextField" min="-2" pref="165" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="phoneNojLabel" min="-2" pref="122" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="phoneNojTextField" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="242" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="savejButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="349" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,29 +70,34 @@
                   <Component id="backButtonjButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="headerjLabel" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="namejLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="namejTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="namejLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="namejTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="addressjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="addressjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="phoneNojLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="phoneNojTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="emailjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addressjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="addressjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="phoneNojLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="phoneNojTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="emailjLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailjTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Component id="savejButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="57" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

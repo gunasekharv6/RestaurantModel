@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public class Restaurant {
     

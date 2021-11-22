@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 /**
  *
- * @author manojreddy
+ * @author gunav
  */
 public enum CityName {
     Boston,NewYork,Florida,Texas,California,Chicago,Michigan,Seattle,SanDieago;
