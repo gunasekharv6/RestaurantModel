@@ -4,6 +4,7 @@
  */
 package userinterface;
 
+import Area.AreaName;
 import Area.AreaNetwork;
 import Business.Customer.Customer;
 import Business.EcoSystem;

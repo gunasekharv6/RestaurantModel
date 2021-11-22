@@ -40,6 +40,11 @@ public class ConfigureASystem {
         DeliveryManDirectory heathDeliveryManDirectory = new DeliveryManDirectory();
         system.getAreaNetworks().add(new AreaNetwork(AreaName.HeathSt, heathStRestaurantDirectory, heathDeliveryManDirectory));
         
+        system.getAreaNetworks().add(new AreaNetwork(AreaName.Cambridge));
+        system.getAreaNetworks().add(new AreaNetwork(AreaName.BackBay));
+        system.getAreaNetworks().add(new AreaNetwork(AreaName.Ruggles));
+//        Cambridge,BackBay,Ruggles
+        
         return system;
     }
     

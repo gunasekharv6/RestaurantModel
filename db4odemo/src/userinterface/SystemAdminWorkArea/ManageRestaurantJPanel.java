@@ -80,7 +80,6 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         restaurantsjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRestaurantsList = new javax.swing.JTable();
-        btnManageRestaurant = new javax.swing.JButton();
         headerManagersjLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRestaurantManagersJtable = new javax.swing.JTable();
@@ -159,13 +158,6 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         if (tblRestaurantsList.getColumnModel().getColumnCount() > 0) {
             tblRestaurantsList.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
-
-        btnManageRestaurant.setText("Manage Restaurant Managers");
-        btnManageRestaurant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageRestaurantActionPerformed(evt);
-            }
-        });
 
         headerManagersjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         headerManagersjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -260,10 +252,8 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(restaurantheaderjLabel)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(restaurantCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(214, 214, 214)
-                                                .addComponent(btnManageRestaurant)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addComponent(restaurantCountjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 484, Short.MAX_VALUE)))
                                 .addGap(26, 26, 26)
                                 .addComponent(btnDeleteManagers, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -304,8 +294,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnManageRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(restaurantheaderjLabel)
                         .addComponent(restaurantCountjLabel)))
@@ -371,33 +360,6 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backButtonjButtonActionPerformed
 
-    private void btnManageRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRestaurantActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = tblRestaurantsList.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row");
-            return;
-        } else {
-            Restaurant selectedRestaurant = (Restaurant) tblRestaurantsList.getValueAt(selectedRow, 1);
-            DefaultTableModel managersModel = (DefaultTableModel) tblRestaurantManagersJtable.getModel();
-            managersModel.setRowCount(0);
-            int employeeCount=0;
-            for(Employee restaurantEmployee:selectedRestaurant.getEmployeeDirectory().getEmployeeList()) {
-                employeeCount++;
-                Object[] row = new Object[6];
-                row[0] = employeeCount;
-                row[1] = restaurantEmployee;
-                row[2] = restaurantEmployee.getUseraccount().getUserName();
-                row[3] = restaurantEmployee.getUseraccount().getPassword();
-                row[4] = restaurantEmployee.getUseraccount().getPhoneNo();
-                row[5] = restaurantEmployee.getUseraccount().getEmail();
-                
-                managersModel.addRow(row);
-            }
-            restaurantManagerCountjLabel.setText(String.valueOf(selectedRestaurant.getEmployeeDirectory().getEmployeeList().size()));
-        }
-    }//GEN-LAST:event_btnManageRestaurantActionPerformed
-
     private void btnUpdateManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateManagersActionPerformed
         // TODO add your handling code here:
         int selectedManager = tblRestaurantManagersJtable.getSelectedRow();
@@ -450,7 +412,30 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
 
     private void tblRestaurantsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRestaurantsListMouseClicked
         // TODO add your handling code here:
-        btnManageRestaurantActionPerformed(null);
+//        btnManageRestaurantActionPerformed(null);
+        int selectedRow = tblRestaurantsList.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row");
+            return;
+        } else {
+            Restaurant selectedRestaurant = (Restaurant) tblRestaurantsList.getValueAt(selectedRow, 1);
+            DefaultTableModel managersModel = (DefaultTableModel) tblRestaurantManagersJtable.getModel();
+            managersModel.setRowCount(0);
+            int employeeCount=0;
+            for(Employee restaurantEmployee:selectedRestaurant.getEmployeeDirectory().getEmployeeList()) {
+                employeeCount++;
+                Object[] row = new Object[6];
+                row[0] = employeeCount;
+                row[1] = restaurantEmployee;
+                row[2] = restaurantEmployee.getUseraccount().getUserName();
+                row[3] = restaurantEmployee.getUseraccount().getPassword();
+                row[4] = restaurantEmployee.getUseraccount().getPhoneNo();
+                row[5] = restaurantEmployee.getUseraccount().getEmail();
+                
+                managersModel.addRow(row);
+            }
+            restaurantManagerCountjLabel.setText(String.valueOf(selectedRestaurant.getEmployeeDirectory().getEmployeeList().size()));
+        }
     }//GEN-LAST:event_tblRestaurantsListMouseClicked
 
 
@@ -460,7 +445,6 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCreateManagers;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteManagers;
-    private javax.swing.JButton btnManageRestaurant;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdateManagers;
     private javax.swing.JLabel headerManagersjLabel;

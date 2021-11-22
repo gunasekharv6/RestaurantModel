@@ -33,13 +33,12 @@ public class SystemAdminManageArea extends javax.swing.JPanel {
         this.areaNetwork = areaNetwork;
         this.userLogged = userLogged;
         initComponents();
-        System.out.println("haha Inside SystemAdminManageArea Panel -- updateLabel "+areaNetwork.getAreaName().name());
         updateLabel();
         
     }
     
     private void updateLabel(){
-        System.out.println("Inside SystemAdminManageArea Panel -- updateLabel "+ areaNetwork.getAreaName().name());
+//        System.out.println("Inside SystemAdminManageArea Panel -- updateLabel "+ areaNetwork.getAreaName().name());
         lblareaname.setText(areaNetwork.getAreaName().name());
     }
 
