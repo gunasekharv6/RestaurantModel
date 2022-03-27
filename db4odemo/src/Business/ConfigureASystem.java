@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  *
- * @author rrheg
+ * @author gunav
  */
 public class ConfigureASystem {
     
