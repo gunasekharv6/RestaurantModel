@@ -174,7 +174,7 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(this, "Successfully updated Restaurant");
         }else{
-            JOptionPane.showMessageDialog(this, "Error updating Restaurant. Please check proper DataTypes");
+            JOptionPane.showMessageDialog(this, "Error updating Restaurant. Please check the values");
         }
     }//GEN-LAST:event_updatejButtonActionPerformed
 
@@ -184,6 +184,7 @@ public class UpdateRestaurantJPanel extends javax.swing.JPanel {
                 !phoneNojTextField.getText().isEmpty() && 
                 phoneNojTextField.getText().matches("^[0-9]+$") && phoneNojTextField.getText().length()==10 ) {
             return true;
+            // emailjTextField.getText().matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
         }
         return false;
     }

@@ -48,6 +48,13 @@ public class Customer {
     public List<Order> getOrders() {
         return orders;
     }
+
+    @Override
+    public String toString() {
+        return useraccount.getName();
+    }
+    
+    
     
     
     
